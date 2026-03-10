@@ -20,7 +20,8 @@ import {
   Link as LinkIcon,
   X,
   Copy,
-  Check
+  Check,
+  Send // Add Telegram icon
 } from "lucide-react";
 import "./portfolio.css";
 
@@ -275,6 +276,14 @@ export default function Portfolio() {
       color: "#34a853"
     },
     {
+      type: "Telegram",
+      value: "@Ni_Col67",
+      username: "Ni_Col67",
+      icon: <Send size={24} />,
+      action: "https://t.me/Ni_Col67",
+      color: "#0088cc"
+    },
+    {
       type: "Location",
       value: "Addis Ababa, Ethiopia",
       icon: <MapPin size={24} />,
@@ -315,6 +324,8 @@ export default function Portfolio() {
             <span><Mail size={16} /> niftalemawel@gmail.com</span>
             <span>•</span>
             <span>0939193603</span>
+            <span>•</span>
+            <span><Send size={16} /> @Ni_Col67</span>
             <span>•</span>
             <span><MapPin size={16} /> Addis Ababa, Ethiopia</span>
           </motion.div>
@@ -728,31 +739,38 @@ export default function Portfolio() {
                           {info.action && (
                             <motion.a
                               href={info.action}
+                              target={info.type === "Telegram" ? "_blank" : undefined}
+                              rel={info.type === "Telegram" ? "noopener noreferrer" : undefined}
                               className="contact-action-btn"
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                             >
-                              {info.type === "Email" ? "Send Email" : "Call Now"}
+                              {info.type === "Email" && "Send Email"}
+                              {info.type === "Phone" && "Call Now"}
+                              {info.type === "Telegram" && "Message on Telegram"}
+                              {info.type === "Location" && "View on Map"}
                             </motion.a>
                           )}
-                          <motion.button
-                            className="contact-action-btn copy-btn"
-                            onClick={() => handleCopy(info.value, info.type)}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                          >
-                            {copiedField === info.type ? (
-                              <>
-                                <Check size={16} />
-                                <span>Copied!</span>
-                              </>
-                            ) : (
-                              <>
-                                <Copy size={16} />
-                                <span>Copy</span>
-                              </>
-                            )}
-                          </motion.button>
+                          {info.type !== "Location" && (
+                            <motion.button
+                              className="contact-action-btn copy-btn"
+                              onClick={() => handleCopy(info.type === "Telegram" ? info.username || info.value : info.value, info.type)}
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              {copiedField === info.type ? (
+                                <>
+                                  <Check size={16} />
+                                  <span>Copied!</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Copy size={16} />
+                                  <span>Copy</span>
+                                </>
+                              )}
+                            </motion.button>
+                          )}
                         </div>
                       </div>
                     </motion.div>
@@ -760,7 +778,7 @@ export default function Portfolio() {
                 </div>
 
                 <div className="modal-footer">
-                  <p>Prefer other platforms?</p>
+                  <p>Connect with me on other platforms:</p>
                   <div className="social-links-modal">
                     <motion.a
                       href="https://github.com/Niftalemrex"
@@ -781,6 +799,16 @@ export default function Portfolio() {
                       whileTap={{ scale: 0.9 }}
                     >
                       <ExternalLink size={20} />
+                    </motion.a>
+                    <motion.a
+                      href="https://t.me/Ni_Col67"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link telegram"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Send size={20} />
                     </motion.a>
                   </div>
                 </div>
