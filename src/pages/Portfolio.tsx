@@ -1,11 +1,10 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { motion, useInView, } from "framer-motion";
-import { useRef, useState, } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import { 
   Code, 
   Smartphone, 
-
   Server, 
   ArrowRight, 
   Github, 
@@ -16,13 +15,12 @@ import {
   Mail,
   MapPin,
   Brain,
-
   Cloud,
   Cpu,
-
-
   Link as LinkIcon,
-
+  X,
+  Copy,
+  Check
 } from "lucide-react";
 import "./portfolio.css";
 
@@ -44,7 +42,6 @@ const skills = [
 
 // Experience data from resume with detailed project information
 export const experiences = [
-
   {
     title: "Full Stack Developer",
     company: "LIMS Project",
@@ -54,7 +51,6 @@ export const experiences = [
     icon: <Briefcase size={20} />,
     description:
       "Developed an enterprise Laboratory Information Management System for managing lab workflows, sample tracking, and test reporting.",
-
     technologies: [
       "React",
       "TypeScript",
@@ -63,17 +59,14 @@ export const experiences = [
       "PostgreSQL",
       "REST API"
     ],
-
     achievements: [
       "Developed multi-role dashboard interfaces for laboratory staff",
       "Implemented secure authentication and role-based access control",
       "Designed laboratory workflow system for sample lifecycle tracking",
       "Integrated REST APIs for real-time test result management"
     ],
-
     github: "https://github.com/Niftalemrex/LIMS"
   },
-
   {
     title: "Frontend Developer",
     company: "WEMS (Wedding Event Management System)",
@@ -83,7 +76,6 @@ export const experiences = [
     icon: <Code size={20} />,
     description:
       "Built a modern multi-role wedding management platform that helps couples, vendors, and event managers organize weddings efficiently.",
-
     technologies: [
       "React",
       "TypeScript",
@@ -93,33 +85,28 @@ export const experiences = [
       "PostgreSQL",
       "TailwindCSS"
     ],
-
     achievements: [
       "Implemented complex form handling and validation flows",
       "Developed JWT-based authentication system",
       "Built multi-role dashboards (Admin, Couples, Vendors, Managers)",
       "Optimized UI performance for mobile and desktop users"
     ],
-
     github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice"
   }
 ];
 
 export const projects = [
-
   {
     name: "Laboratory Information Management System (LIMS)",
     icon: <Briefcase size={18} />,
     description:
       "Enterprise laboratory management platform designed to manage laboratory workflows, samples, test results, and reporting securely.",
-
     technologies: [
       "Django",
       "PostgreSQL",
       "React",
       "REST API"
     ],
-
     features: [
       "Sample tracking system",
       "Automated laboratory workflow management",
@@ -127,23 +114,19 @@ export const projects = [
       "Role-based access control for lab staff",
       "Audit logs for regulatory compliance"
     ],
-
     github: "https://github.com/Niftalemrex/LIMS"
   },
-
   {
     name: "Stroke Prediction System",
     icon: <Code size={18} />,
     description:
       "Machine learning system that predicts stroke risk using patient health data and provides insights for preventive healthcare.",
-
     technologies: [
       "Python",
       "Scikit-learn",
       "Django",
       "PostgreSQL"
     ],
-
     features: [
       "ML model for stroke risk prediction",
       "Data preprocessing pipeline",
@@ -151,16 +134,13 @@ export const projects = [
       "Risk scoring system",
       "Exportable medical reports"
     ],
-
     github: "https://github.com/Niftalemrex/Stroke-Prediction-ML"
   },
-
   {
     name: "Wedding Event Management System",
     icon: <Code size={18} />,
     description:
       "Full-stack event planning platform for organizing weddings with multiple user roles and event workflows.",
-
     technologies: [
       "React",
       "TypeScript",
@@ -168,7 +148,6 @@ export const projects = [
       "Django",
       "PostgreSQL"
     ],
-
     features: [
       "Multi-role system (Super Admin, Admin, Couples, Vendors)",
       "Guest list and RSVP management",
@@ -176,10 +155,8 @@ export const projects = [
       "Event scheduling and planning",
       "Budget tracking dashboard"
     ],
-
     github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice"
   }
-
 ];
 
 // Education data
@@ -237,7 +214,8 @@ const githubRepos = [
 ];
 
 export default function Portfolio() {
-  const [] = useState<string | null>(null);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
   
   // Refs for scroll animations
   const heroRef = useRef(null);
@@ -274,6 +252,35 @@ export default function Portfolio() {
     hidden: { scale: 0.8, opacity: 0 },
     visible: { scale: 1, opacity: 1 }
   };
+
+  const handleCopy = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  };
+
+  const contactInfo = [
+    {
+      type: "Email",
+      value: "niftalemawel@gmail.com",
+      icon: <Mail size={24} />,
+      action: "mailto:niftalemawel@gmail.com",
+      color: "#ea4335"
+    },
+    {
+      type: "Phone",
+      value: "0939193603",
+      icon: <Smartphone size={24} />,
+      action: "tel:0939193603",
+      color: "#34a853"
+    },
+    {
+      type: "Location",
+      value: "Addis Ababa, Ethiopia",
+      icon: <MapPin size={24} />,
+      color: "#4285f4"
+    }
+  ];
 
   return (
     <>
@@ -439,101 +446,73 @@ export default function Portfolio() {
 
       {/* Experience Section with Detailed Projects */}
       <section ref={experienceRef} className="portfolio-experience">
-  <motion.div
-    className="experience-container"
-    initial="hidden"
-    animate={isExperienceInView ? "visible" : "hidden"}
-    variants={staggerContainer}
-  >
-
-    <motion.div variants={fadeInUp} className="section-header">
-      <span className="section-subtitle">My Journey</span>
-      <h2 className="section-title">Professional Experience</h2>
-      <div className="section-divider"></div>
-    </motion.div>
-
-    <div className="timeline">
-
-      {experiences.map((exp, index) => (
-
         <motion.div
-          key={index}
-          className="timeline-item"
-          variants={fadeInUp}
+          className="experience-container"
+          initial="hidden"
+          animate={isExperienceInView ? "visible" : "hidden"}
+          variants={staggerContainer}
         >
+          <motion.div variants={fadeInUp} className="section-header">
+            <span className="section-subtitle">My Journey</span>
+            <h2 className="section-title">Professional Experience</h2>
+            <div className="section-divider"></div>
+          </motion.div>
 
-          <div className="timeline-icon">
-            {exp.icon}
-          </div>
-
-          <div className="timeline-content">
-
-            <div className="timeline-header">
-              <h3>{exp.title}</h3>
-              <span className="timeline-period">{exp.period}</span>
-            </div>
-
-            <h4>
-              {exp.company} • {exp.location}
-            </h4>
-
-            <p className="timeline-description">
-              {exp.description}
-            </p>
-
-            {/* Technologies */}
-            <div className="project-technologies">
-              {exp.technologies.map((tech, i) => (
-                <span key={i} className="tech-tag">
-                  {tech}
-                </span>
-              ))}
-            </div>
-
-            {/* Achievements */}
-            <div className="experience-achievements">
-
-              <h5>Key Achievements</h5>
-
-              <ul>
-                {exp.achievements.map((achievement, idx) => (
-                  <li key={idx}>{achievement}</li>
-                ))}
-              </ul>
-
-            </div>
-
-            {/* Repository Link */}
-            <div className="experience-github">
-
-              <motion.a
-                href={exp.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="github-profile-link"
-                whileHover={{ scale: 1.05 }}
+          <div className="timeline">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                className="timeline-item"
+                variants={fadeInUp}
               >
-
-                <Github size={18} />
-
-                <span>View Repository</span>
-
-                <ExternalLink size={14} />
-
-              </motion.a>
-
-            </div>
-
+                <div className="timeline-icon">
+                  {exp.icon}
+                </div>
+                <div className="timeline-content">
+                  <div className="timeline-header">
+                    <h3>{exp.title}</h3>
+                    <span className="timeline-period">{exp.period}</span>
+                  </div>
+                  <h4>
+                    {exp.company} • {exp.location}
+                  </h4>
+                  <p className="timeline-description">
+                    {exp.description}
+                  </p>
+                  <div className="project-technologies">
+                    {exp.technologies.map((tech, i) => (
+                      <span key={i} className="tech-tag">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="experience-achievements">
+                    <h5>Key Achievements</h5>
+                    <ul>
+                      {exp.achievements.map((achievement, idx) => (
+                        <li key={idx}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="experience-github">
+                    <motion.a
+                      href={exp.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="github-profile-link"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <Github size={18} />
+                      <span>View Repository</span>
+                      <ExternalLink size={14} />
+                    </motion.a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-
         </motion.div>
-
-      ))}
-
-    </div>
-
-  </motion.div>
-</section>
+      </section>
 
       {/* Education Section */}
       <section ref={educationRef} className="portfolio-education">
@@ -682,17 +661,134 @@ export default function Portfolio() {
         >
           <h2>Let's Work Together</h2>
           <p>Have a project in mind? Let's bring your ideas to life.</p>
-          <motion.a
-            href="mailto:niftalemawel@gmail.com"
+          <motion.button
+            onClick={() => setShowContactModal(true)}
             className="primary-btn cta-btn"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Start a Conversation
             <ArrowRight size={18} />
-          </motion.a>
+          </motion.button>
         </motion.div>
       </section>
+
+      {/* Contact Modal */}
+      <AnimatePresence>
+        {showContactModal && (
+          <motion.div
+            className="modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowContactModal(false)}
+          >
+            <motion.div
+              className="modal-content"
+              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="modal-header">
+                <h2>Contact Information</h2>
+                <motion.button
+                  className="modal-close"
+                  onClick={() => setShowContactModal(false)}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <X size={24} />
+                </motion.button>
+              </div>
+
+              <div className="modal-body">
+                <p className="modal-subtitle">
+                  Let's collaborate! Reach out to me through any of these channels:
+                </p>
+
+                <div className="contact-cards">
+                  {contactInfo.map((info, index) => (
+                    <motion.div
+                      key={index}
+                      className="contact-card"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      style={{ borderLeftColor: info.color }}
+                    >
+                      <div className="contact-icon" style={{ color: info.color }}>
+                        {info.icon}
+                      </div>
+                      <div className="contact-details">
+                        <h3>{info.type}</h3>
+                        <p>{info.value}</p>
+                        <div className="contact-actions">
+                          {info.action && (
+                            <motion.a
+                              href={info.action}
+                              className="contact-action-btn"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              {info.type === "Email" ? "Send Email" : "Call Now"}
+                            </motion.a>
+                          )}
+                          <motion.button
+                            className="contact-action-btn copy-btn"
+                            onClick={() => handleCopy(info.value, info.type)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            {copiedField === info.type ? (
+                              <>
+                                <Check size={16} />
+                                <span>Copied!</span>
+                              </>
+                            ) : (
+                              <>
+                                <Copy size={16} />
+                                <span>Copy</span>
+                              </>
+                            )}
+                          </motion.button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="modal-footer">
+                  <p>Prefer other platforms?</p>
+                  <div className="social-links-modal">
+                    <motion.a
+                      href="https://github.com/Niftalemrex"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link github"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Github size={20} />
+                    </motion.a>
+                    <motion.a
+                      href="https://linkedin.com/in/niftalem-awel"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link linkedin"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <ExternalLink size={20} />
+                    </motion.a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </>
