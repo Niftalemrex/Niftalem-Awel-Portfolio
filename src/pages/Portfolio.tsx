@@ -1,11 +1,11 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { motion, useInView, } from "framer-motion";
+import { useRef, useState, } from "react";
 import { 
   Code, 
   Smartphone, 
-  Palette, 
+
   Server, 
   ArrowRight, 
   Github, 
@@ -16,24 +16,13 @@ import {
   Mail,
   MapPin,
   Brain,
-  HeartPulse,
-  FlaskConical,
-  Calendar,
-  Users,
-  Shield,
-  Database,
+
   Cloud,
   Cpu,
-  Globe,
-  X,
-  ChevronLeft,
-  ChevronRight,
+
+
   Link as LinkIcon,
-  Layout,
-  Activity,
-  FileText,
-  Settings,
-  BarChart
+
 } from "lucide-react";
 import "./portfolio.css";
 
@@ -54,80 +43,143 @@ const skills = [
 ];
 
 // Experience data from resume with detailed project information
-const experiences = [
+export const experiences = [
+
   {
-    title: "Full Stack / Web & AI / Machine Learning Engineer",
-    company: "Professional Electronic Data Systems (PEDS)",
+    title: "Full Stack Developer",
+    company: "LIMS Project",
+    employmentType: "Internship",
     period: "02/2024 - 09/2025",
     location: "Addis Ababa, Ethiopia",
-    description: "Developed multi-role platforms for wedding management, HIDS, and lab inventory systems. Built AI/ML features including Stroke Prediction System.",
     icon: <Briefcase size={20} />,
-    github: "https://github.com/Niftalemrex",
-    achievements: [
-      "Led development of 4 major enterprise applications",
-      "Implemented AI/ML features serving 10,000+ users",
-      "Reduced system response time by 40% through optimization",
-      "Mentored junior developers and conducted code reviews"
+    description:
+      "Developed an enterprise Laboratory Information Management System for managing lab workflows, sample tracking, and test reporting.",
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Django",
+      "PostgreSQL",
+      "REST API"
     ],
-    projects: [
-      {
-        name: "Wedding Management Platform",
-        description: "A full-featured dashboard and mobile platform for planning weddings efficiently. Users can manage guest lists, vendor bookings, event schedules, and budgets. The app features a modern UI/UX, real-time notifications, and multi-language support (Amharic ↔ English ↔ tigriga ↔ oromiga ↔ arbic ↔ chinga). Built with React/TypeScript, Tailwind CSS, and Firebase/PostgreSQL.",
-        technologies: ["React", "TypeScript", "Tailwind CSS", "Firebase", "PostgreSQL"],
-        github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice",
-        features: [
-          "Multi-language support (6 languages including Amharic, Tigriga, Oromiga, Arabic, Chinese, English)",
-          "Real-time notifications for updates and reminders",
-          "Vendor booking and management system",
-          "Guest list management with RSVP tracking",
-          "Budget planning and expense tracking",
-          "Event schedule builder with timeline view"
-        ]
-      },
-      {
-        name: "HIDS (Hospital Information & Data System)",
-        description: "A secure system for hospital management that tracks patients, appointments, staff, and medical records. Designed with modular architecture for easy customization, role-based access control, and real-time updates. Developed using Django, PostgreSQL, React, and TypeScript.",
-        technologies: ["Django", "PostgreSQL", "React", "TypeScript", "REST API"],
-        github: "https://github.com/Niftalemrex/HIDS",
-        features: [
-          "Patient registration and medical history tracking",
-          "Appointment scheduling and management",
-          "Staff management with role-based access control",
-          "Medical records management with encryption",
-          "Real-time updates and notifications",
-          "Analytics dashboard for hospital operations"
-        ]
-      },
-      {
-        name: "LIMS (Laboratory Information Management System)",
-        description: "A comprehensive laboratory management platform for sample tracking, test result management, and report generation. Features include certificate management, workflow automation, and audit logs. Built with React, TypeScript, Python/Django, and PostgreSQL.",
-        technologies: ["React", "TypeScript", "Python", "Django", "PostgreSQL"],
-        github: "https://github.com/Niftalemrex/LIMS",
-        features: [
-          "Sample tracking with barcode integration",
-          "Test result management and validation",
-          "Automated report generation with certificates",
-          "Workflow automation for laboratory processes",
-          "Audit logs for compliance tracking",
-          "Inventory management for lab supplies"
-        ]
-      },
-      {
-        name: "Stroke Prediction System",
-        description: "An AI-powered health prediction system that evaluates risk factors and predicts stroke probability. Utilizes machine learning models for data analysis and visualization, providing actionable insights for preventive care. Developed with Python, Django, and React.",
-        technologies: ["Python", "Scikit-learn", "Django", "React", "PostgreSQL"],
-        github: "https://github.com/Niftalemrex/Stroke-Prediction-ML",
-        features: [
-          "ML model for stroke risk prediction (Scikit-learn)",
-          "Patient data analysis with visualization",
-          "Risk factor assessment and scoring",
-          "Preventive care recommendations",
-          "Historical data tracking and trends",
-          "Exportable reports for healthcare providers"
-        ]
-      }
-    ]
+
+    achievements: [
+      "Developed multi-role dashboard interfaces for laboratory staff",
+      "Implemented secure authentication and role-based access control",
+      "Designed laboratory workflow system for sample lifecycle tracking",
+      "Integrated REST APIs for real-time test result management"
+    ],
+
+    github: "https://github.com/Niftalemrex/LIMS"
+  },
+
+  {
+    title: "Frontend Developer",
+    company: "WEMS (Wedding Event Management System)",
+    employmentType: "Freelance",
+    period: "02/2025 - 05/2025",
+    location: "Addis Ababa, Ethiopia",
+    icon: <Code size={20} />,
+    description:
+      "Built a modern multi-role wedding management platform that helps couples, vendors, and event managers organize weddings efficiently.",
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Node.js",
+      "Django",
+      "PostgreSQL",
+      "TailwindCSS"
+    ],
+
+    achievements: [
+      "Implemented complex form handling and validation flows",
+      "Developed JWT-based authentication system",
+      "Built multi-role dashboards (Admin, Couples, Vendors, Managers)",
+      "Optimized UI performance for mobile and desktop users"
+    ],
+
+    github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice"
   }
+];
+
+export const projects = [
+
+  {
+    name: "Laboratory Information Management System (LIMS)",
+    icon: <Briefcase size={18} />,
+    description:
+      "Enterprise laboratory management platform designed to manage laboratory workflows, samples, test results, and reporting securely.",
+
+    technologies: [
+      "Django",
+      "PostgreSQL",
+      "React",
+      "REST API"
+    ],
+
+    features: [
+      "Sample tracking system",
+      "Automated laboratory workflow management",
+      "Secure test result storage and reporting",
+      "Role-based access control for lab staff",
+      "Audit logs for regulatory compliance"
+    ],
+
+    github: "https://github.com/Niftalemrex/LIMS"
+  },
+
+  {
+    name: "Stroke Prediction System",
+    icon: <Code size={18} />,
+    description:
+      "Machine learning system that predicts stroke risk using patient health data and provides insights for preventive healthcare.",
+
+    technologies: [
+      "Python",
+      "Scikit-learn",
+      "Django",
+      "PostgreSQL"
+    ],
+
+    features: [
+      "ML model for stroke risk prediction",
+      "Data preprocessing pipeline",
+      "Health data visualization",
+      "Risk scoring system",
+      "Exportable medical reports"
+    ],
+
+    github: "https://github.com/Niftalemrex/Stroke-Prediction-ML"
+  },
+
+  {
+    name: "Wedding Event Management System",
+    icon: <Code size={18} />,
+    description:
+      "Full-stack event planning platform for organizing weddings with multiple user roles and event workflows.",
+
+    technologies: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Django",
+      "PostgreSQL"
+    ],
+
+    features: [
+      "Multi-role system (Super Admin, Admin, Couples, Vendors)",
+      "Guest list and RSVP management",
+      "Vendor booking system",
+      "Event scheduling and planning",
+      "Budget tracking dashboard"
+    ],
+
+    github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice"
+  }
+
 ];
 
 // Education data
@@ -185,7 +237,7 @@ const githubRepos = [
 ];
 
 export default function Portfolio() {
-  const [expandedProject, setExpandedProject] = useState<string | null>(null);
+  const [] = useState<string | null>(null);
   
   // Refs for scroll animations
   const heroRef = useRef(null);
@@ -387,136 +439,101 @@ export default function Portfolio() {
 
       {/* Experience Section with Detailed Projects */}
       <section ref={experienceRef} className="portfolio-experience">
+  <motion.div
+    className="experience-container"
+    initial="hidden"
+    animate={isExperienceInView ? "visible" : "hidden"}
+    variants={staggerContainer}
+  >
+
+    <motion.div variants={fadeInUp} className="section-header">
+      <span className="section-subtitle">My Journey</span>
+      <h2 className="section-title">Professional Experience</h2>
+      <div className="section-divider"></div>
+    </motion.div>
+
+    <div className="timeline">
+
+      {experiences.map((exp, index) => (
+
         <motion.div
-          className="experience-container"
-          initial="hidden"
-          animate={isExperienceInView ? "visible" : "hidden"}
-          variants={staggerContainer}
+          key={index}
+          className="timeline-item"
+          variants={fadeInUp}
         >
-          <motion.div variants={fadeInUp} className="section-header">
-            <span className="section-subtitle">My journey</span>
-            <h2 className="section-title">Professional Experience</h2>
-            <div className="section-divider"></div>
-          </motion.div>
 
-          <div className="timeline">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                className="timeline-item"
-                variants={fadeInUp}
-              >
-                <div className="timeline-icon">
-                  {exp.icon}
-                </div>
-                <div className="timeline-content">
-                  <div className="timeline-header">
-                    <h3>{exp.title}</h3>
-                    <span className="timeline-period">{exp.period}</span>
-                  </div>
-                  <h4>{exp.company} • {exp.location}</h4>
-                  <p className="timeline-description">{exp.description}</p>
-                  
-                  <div className="experience-achievements">
-                    <h5>Key Achievements:</h5>
-                    <ul>
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={idx}>{achievement}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="experience-projects">
-                    <h5>Projects Developed:</h5>
-                    <div className="projects-accordion">
-                      {exp.projects.map((project, idx) => (
-                        <motion.div 
-                          key={idx}
-                          className="project-accordion-item"
-                          initial={false}
-                        >
-                          <div 
-                            className="project-accordion-header"
-                            onClick={() => setExpandedProject(expandedProject === project.name ? null : project.name)}
-                          >
-                            <div className="project-header-info">
-                              <h6>{project.name}</h6>
-                              <span className="project-tech-badge">
-                                {project.technologies.length} technologies
-                              </span>
-                            </div>
-                            <motion.span 
-                              className="accordion-icon"
-                              animate={{ rotate: expandedProject === project.name ? 180 : 0 }}
-                            >
-                              ▼
-                            </motion.span>
-                          </div>
-                          
-                          <AnimatePresence>
-                            {expandedProject === project.name && (
-                              <motion.div 
-                                className="project-accordion-content"
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                              >
-                                <p className="project-description">{project.description}</p>
-                                
-                                <div className="project-features">
-                                  <h6>Key Features:</h6>
-                                  <ul>
-                                    {project.features.map((feature, i) => (
-                                      <li key={i}>{feature}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-
-                                <div className="project-technologies">
-                                  {project.technologies.map((tech, i) => (
-                                    <span key={i} className="tech-tag">{tech}</span>
-                                  ))}
-                                </div>
-
-                                <motion.a 
-                                  href={project.github}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="project-github-link"
-                                  whileHover={{ x: 5 }}
-                                >
-                                  <Github size={16} />
-                                  <span>View on GitHub</span>
-                                  <ExternalLink size={12} />
-                                </motion.a>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="experience-github">
-                    <motion.a 
-                      href={exp.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="github-profile-link"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <Github size={18} />
-                      <span>View GitHub Profile</span>
-                      <ExternalLink size={14} />
-                    </motion.a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="timeline-icon">
+            {exp.icon}
           </div>
+
+          <div className="timeline-content">
+
+            <div className="timeline-header">
+              <h3>{exp.title}</h3>
+              <span className="timeline-period">{exp.period}</span>
+            </div>
+
+            <h4>
+              {exp.company} • {exp.location}
+            </h4>
+
+            <p className="timeline-description">
+              {exp.description}
+            </p>
+
+            {/* Technologies */}
+            <div className="project-technologies">
+              {exp.technologies.map((tech, i) => (
+                <span key={i} className="tech-tag">
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Achievements */}
+            <div className="experience-achievements">
+
+              <h5>Key Achievements</h5>
+
+              <ul>
+                {exp.achievements.map((achievement, idx) => (
+                  <li key={idx}>{achievement}</li>
+                ))}
+              </ul>
+
+            </div>
+
+            {/* Repository Link */}
+            <div className="experience-github">
+
+              <motion.a
+                href={exp.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="github-profile-link"
+                whileHover={{ scale: 1.05 }}
+              >
+
+                <Github size={18} />
+
+                <span>View Repository</span>
+
+                <ExternalLink size={14} />
+
+              </motion.a>
+
+            </div>
+
+          </div>
+
         </motion.div>
-      </section>
+
+      ))}
+
+    </div>
+
+  </motion.div>
+</section>
 
       {/* Education Section */}
       <section ref={educationRef} className="portfolio-education">
