@@ -44,7 +44,6 @@ const skills = [
 // Experience data from resume with detailed project information
 export const experiences = [
   {
-<<<<<<< HEAD
     title: "Frontend Developer",
     company: "WEMS (Wedding Event Management System)",
     employmentType: "Freelance",
@@ -72,8 +71,6 @@ export const experiences = [
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
   {
-=======
->>>>>>> 77dbc5843eee6f9ec47515c1605de1e3441b97d7
     title: "Full Stack Developer",
     company: "LIMS Project",
     employmentType: "Internship",
@@ -96,44 +93,13 @@ export const experiences = [
       "Designed laboratory workflow system for sample lifecycle tracking",
       "Integrated REST APIs for real-time test result management"
     ],
-<<<<<<< HEAD
     github: "https://github.com/Niftalemrex/LIMS",
     demo: "https://niftalemrex.github.io/LIMS-Laboratory-Information-Management-System/"
-=======
-    github: "https://github.com/Niftalemrex/LIMS"
-  },
-  {
-    title: "Frontend Developer",
-    company: "WEMS (Wedding Event Management System)",
-    employmentType: "Freelance",
-    period: "02/2025 - 05/2025",
-    location: "Addis Ababa, Ethiopia",
-    icon: <Code size={20} />,
-    description:
-      "Built a modern multi-role wedding management platform that helps couples, vendors, and event managers organize weddings efficiently.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Node.js",
-      "Django",
-      "PostgreSQL",
-      "TailwindCSS"
-    ],
-    achievements: [
-      "Implemented complex form handling and validation flows",
-      "Developed JWT-based authentication system",
-      "Built multi-role dashboards (Admin, Couples, Vendors, Managers)",
-      "Optimized UI performance for mobile and desktop users"
-    ],
-    github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice"
->>>>>>> 77dbc5843eee6f9ec47515c1605de1e3441b97d7
   }
 ];
 
 export const projects = [
   {
-<<<<<<< HEAD
     name: "Wedding Event Management System",
     icon: <Code size={18} />,
     description:
@@ -156,8 +122,6 @@ export const projects = [
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
   {
-=======
->>>>>>> 77dbc5843eee6f9ec47515c1605de1e3441b97d7
     name: "Laboratory Information Management System (LIMS)",
     icon: <Briefcase size={18} />,
     description:
@@ -175,12 +139,8 @@ export const projects = [
       "Role-based access control for lab staff",
       "Audit logs for regulatory compliance"
     ],
-<<<<<<< HEAD
     github: "https://github.com/Niftalemrex/LIMS",
     demo: "https://niftalemrex.github.io/LIMS-Laboratory-Information-Management-System/"
-=======
-    github: "https://github.com/Niftalemrex/LIMS"
->>>>>>> 77dbc5843eee6f9ec47515c1605de1e3441b97d7
   },
   {
     name: "Stroke Prediction System",
@@ -201,30 +161,6 @@ export const projects = [
       "Exportable medical reports"
     ],
     github: "https://github.com/Niftalemrex/Stroke-Prediction-ML"
-<<<<<<< HEAD
-=======
-  },
-  {
-    name: "Wedding Event Management System",
-    icon: <Code size={18} />,
-    description:
-      "Full-stack event planning platform for organizing weddings with multiple user roles and event workflows.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Django",
-      "PostgreSQL"
-    ],
-    features: [
-      "Multi-role system (Super Admin, Admin, Couples, Vendors)",
-      "Guest list and RSVP management",
-      "Vendor booking system",
-      "Event scheduling and planning",
-      "Budget tracking dashboard"
-    ],
-    github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice"
->>>>>>> 77dbc5843eee6f9ec47515c1605de1e3441b97d7
   }
 ];
 
@@ -573,11 +509,7 @@ export default function Portfolio() {
                       ))}
                     </ul>
                   </div>
-<<<<<<< HEAD
                   <div className="experience-links" style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
-=======
-                  <div className="experience-github">
->>>>>>> 77dbc5843eee6f9ec47515c1605de1e3441b97d7
                     <motion.a
                       href={exp.github}
                       target="_blank"
