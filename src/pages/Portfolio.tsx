@@ -67,7 +67,7 @@ export const experiences = [
       "Built multi-role dashboards (Admin, Couples, Vendors, Managers)",
       "Optimized UI performance for mobile and desktop users"
     ],
-    github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice",
+    github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
   {
@@ -93,7 +93,7 @@ export const experiences = [
       "Designed laboratory workflow system for sample lifecycle tracking",
       "Integrated REST APIs for real-time test result management"
     ],
-    github: "https://github.com/Niftalemrex/LIMS",
+    github: "https://github.com/Niftalemrex/LIMS-Laboratory-Information-Management-System",
     demo: "https://niftalemrex.github.io/LIMS-Laboratory-Information-Management-System/"
   }
 ];
@@ -118,7 +118,7 @@ export const projects = [
       "Event scheduling and planning",
       "Budget tracking dashboard"
     ],
-    github: "https://github.com/Niftalemrex/HapplyEver-WEMS-Backend-Microservice",
+    github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
   {
@@ -139,7 +139,7 @@ export const projects = [
       "Role-based access control for lab staff",
       "Audit logs for regulatory compliance"
     ],
-    github: "https://github.com/Niftalemrex/LIMS",
+    github: "https://github.com/Niftalemrex/LIMS-Laboratory-Information-Management-System",
     demo: "https://niftalemrex.github.io/LIMS-Laboratory-Information-Management-System/"
   },
   {
@@ -210,11 +210,10 @@ const certifications = [
 
 // GitHub repositories
 const githubRepos = [
-  { name: "HapplyEver-WEMS-Backend-Microservice", description: "Wedding Management System Backend Microservice", language: "JavaScript", stars: 12, forks: 4 },
-  { name: "Wedding-Events-Management-System-Frontend", description: "Frontend for Wedding Events Management System", language: "CSS", stars: 8, forks: 3 },
+  { name: "WEMS-Wedding-Events-Management-System", description: "Wedding Events Management System", language: "TypeScript", stars: 8, forks: 3 },
   { name: "Stroke-Prediction-ML", description: "ML model for stroke risk prediction", language: "Python", stars: 15, forks: 6 },
-  { name: "LIMS", description: "Laboratory Information Management System", language: "TypeScript", stars: 10, forks: 2 },
-  { name: "HIDS", description: "Hospital Information Dissemination System", language: "Python", stars: 7, forks: 1 },
+  { name: "LIMS-Laboratory-Information-Management-System", description: "Laboratory Information Management System", language: "TypeScript", stars: 10, forks: 2 },
+  { name: "HIDS", description: "Hospital Information Dissemination System", language: "PHP", stars: 7, forks: 1 },
   { name: "Webcam_recognize_faces-eyes", description: "Real-time face and eye recognition", language: "Python", stars: 20, forks: 8 }
 ];
 
