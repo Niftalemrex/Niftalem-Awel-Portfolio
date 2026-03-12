@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart, ArrowUp, MapPin, Phone } from "lucide-react";
+import { Github, Linkedin, Mail, Heart, ArrowUp, MapPin, Phone, MessageCircle, Send } from "lucide-react";
 import "./footer.css";
 
 export default function Footer() {
@@ -90,7 +90,7 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Social & CTA Section */}
           <motion.div 
             className="footer-social"
             initial={{ y: 30, opacity: 0 }}
@@ -123,6 +123,17 @@ export default function Footer() {
                 <Linkedin size={20} />
               </motion.a>
               <motion.a
+                href="https://t.me/Ni_Col67"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -5, scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="footer-social-icon telegram"
+                title="Telegram"
+              >
+                <Send size={20} />
+              </motion.a>
+              <motion.a
                 href="mailto:niftalemawel@gmail.com"
                 whileHover={{ y: -5, scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -133,18 +144,44 @@ export default function Footer() {
               </motion.a>
             </div>
 
-            {/* Call to Action */}
-            <div className="footer-cta">
-              <p>Have a project in mind?</p>
-              <motion.a
-                href="mailto:niftalemawel@gmail.com"
-                className="footer-cta-btn"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Let's Talk
-              </motion.a>
-            </div>
+            {/* Let's Talk Section - Enhanced CTA */}
+            <motion.div 
+              className="footer-lets-talk"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className="lets-talk-content">
+                <MessageCircle size={24} className="lets-talk-icon" />
+                <div className="lets-talk-text">
+                  <h5>Let's Start a Conversation</h5>
+                  <p>Have a project in mind? Let's discuss how I can help bring your ideas to life.</p>
+                </div>
+              </div>
+              <div className="lets-talk-buttons">
+                <motion.a
+                  href="mailto:niftalemawel@gmail.com"
+                  className="lets-talk-btn primary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Mail size={18} />
+                  Email Me
+                </motion.a>
+                <motion.a
+                  href="https://t.me/Ni_Col67"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lets-talk-btn secondary"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Send size={18} />
+                  Telegram
+                </motion.a>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -153,7 +190,7 @@ export default function Footer() {
           className="footer-bottom"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.6 }}
           viewport={{ once: true }}
         >
           <div className="footer-copyright">

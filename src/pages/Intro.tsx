@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTypewriter } from "../hooks/useTypewriter";
@@ -15,20 +15,15 @@ import {
   MapPin,
   Briefcase,
   Award,
-  ExternalLink
+
+  FileText,
+  Eye,
+  X
 } from "lucide-react";
 import "./intro.css";
 
-// ✅ Import images (important in Vite)
-import codeImg from "../assets/code.jpg";
-import pcvImg from "../assets/pcv.jpg";
-import peneImg from "../assets/pene.jpg";
-import vbvImg from "../assets/vbv.jpg";
-import img1 from "../assets/pexels-caio-56759.jpg";
-import img2 from "../assets/pexels-medhat-ayad-122846-447592.jpg";
-
-// Import profile image
-import profileImg from "../assets/profile.jpg"; // Add your profile image
+// Import profile image only (background images removed)
+import profileImg from "../assets/profile.jpg";
 
 // Import CV PDF
 import cvPDF from "../File/Niftalem Awel Resume.pdf";
@@ -41,37 +36,18 @@ type Role = {
   gradient: string;
 };
 
-// Define proper variants type
-const floatingVariants: Variants = {
-  initial: { y: 0, opacity: 0.3 },
-  animate: (i: number) => ({
-    y: [0, -15, 0],
-    opacity: [0.3, 0.5, 0.3],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      delay: i * 0.15,
-      ease: "easeInOut"
-    }
-  }),
-  hover: {
-    scale: 1.1,
-    opacity: 0.8,
-    transition: { duration: 0.3 }
-  }
-};
 
 const particleVariants: Variants = {
   initial: { scale: 0, opacity: 0 },
   animate: (i: number) => ({
     scale: [0, 1, 0],
-    opacity: [0, 0.8, 0],
+    opacity: [0, 0.5, 0],
     x: Math.random() * 200 - 100,
     y: Math.random() * 200 - 100,
     transition: {
-      duration: 3 + Math.random() * 2,
+      duration: 2 + Math.random() * 2,
       repeat: Infinity,
-      delay: i * 0.1,
+      delay: i * 0.05,
       ease: "easeInOut"
     }
   })
@@ -82,10 +58,11 @@ export default function Intro() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isMobile, setIsMobile] = useState(false);
+  const [showCVModal, setShowCVModal] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   // Check if mobile
   useEffect(() => {
@@ -117,7 +94,6 @@ export default function Intro() {
 
   // Mouse move tracking for parallax effect with throttling
   useEffect(() => {
-    // Use number type for browser setTimeout/clearTimeout
     let timeoutId: ReturnType<typeof setTimeout>;
     
     const handleMouseMove = (e: MouseEvent) => {
@@ -127,13 +103,12 @@ export default function Intro() {
           const { clientX, clientY } = e;
           const rect = containerRef.current?.getBoundingClientRect();
           
-          // Add null check for rect
           if (rect) {
             const { width, height, left, top } = rect;
             
             // Calculate relative position
-            const x = ((clientX - left) / width - 0.5) * 40;
-            const y = ((clientY - top) / height - 0.5) * 40;
+            const x = ((clientX - left) / width - 0.5) * 20;
+            const y = ((clientY - top) / height - 0.5) * 20;
             
             setMousePosition({ x, y });
             setCursorPosition({ x: clientX - left, y: clientY - top });
@@ -192,36 +167,40 @@ export default function Intro() {
     true // loop
   );
 
-  // ✅ Use imported images
-  const images = [codeImg, pcvImg, peneImg, vbvImg, img1, img2];
-
   // Parallax transforms with proper typing and spring physics
   const springConfig = { stiffness: 50, damping: 20, mass: 0.5 };
   
-  const cardX = useSpring(useTransform(() => mousePosition.x * 0.3), springConfig);
-  const cardY = useSpring(useTransform(() => mousePosition.y * 0.3), springConfig);
-  const cardRotateX = useSpring(useTransform(() => mousePosition.y * 0.02), springConfig);
-  const cardRotateY = useSpring(useTransform(() => mousePosition.x * -0.02), springConfig);
+  const cardX = useSpring(useTransform(() => mousePosition.x * 0.2), springConfig);
+  const cardY = useSpring(useTransform(() => mousePosition.y * 0.2), springConfig);
+  const cardRotateX = useSpring(useTransform(() => mousePosition.y * 0.01), springConfig);
+  const cardRotateY = useSpring(useTransform(() => mousePosition.x * -0.01), springConfig);
   
-  const backgroundX = useSpring(useTransform(() => mousePosition.x * -0.1), springConfig);
-  const backgroundY = useSpring(useTransform(() => mousePosition.y * -0.1), springConfig);
-  
-  const glareX = useSpring(useTransform(() => (mousePosition.x / 40 + 0.5) * 100), springConfig);
-  const glareY = useSpring(useTransform(() => (mousePosition.y / 40 + 0.5) * 100), springConfig);
 
-  // Updated CV download handler using imported PDF
+  
+  const glareX = useSpring(useTransform(() => (mousePosition.x / 20 + 0.5) * 100), springConfig);
+  const glareY = useSpring(useTransform(() => (mousePosition.y / 20 + 0.5) * 100), springConfig);
+
+  // Handle CV download
   const handleDownloadCV = useCallback(() => {
-    const link = document.createElement("a");
-    link.href = cvPDF;
-    link.download = "Niftalem_Awel_CV.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    setIsDownloading(true);
+    
+    setTimeout(() => {
+      const link = document.createElement("a");
+      link.href = cvPDF;
+      link.download = "Niftalem_Awel_CV.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setIsDownloading(false);
+      setShowCVModal(false);
+    }, 800);
   }, []);
 
-  // Safe to access window for initial particle positions
-  const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-  const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+  // Handle CV view in browser
+  const handleViewCV = useCallback(() => {
+    window.open(cvPDF, "_blank");
+    setShowCVModal(false);
+  }, []);
 
   return (
     <motion.div 
@@ -231,68 +210,15 @@ export default function Intro() {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Custom Cursor Glow */}
-      {!isMobile && (
-        <motion.div 
-          className="cursor-glow"
-          animate={{
-            x: cursorPosition.x - 150,
-            y: cursorPosition.y - 150,
-          }}
-          transition={{ type: "spring", damping: 30, stiffness: 200 }}
-        />
-      )}
-
-      {/* Animated Background Grid with Parallax */}
-      <motion.div 
-        className="background-grid"
-        style={{ 
-          x: backgroundX, 
-          y: backgroundY 
-        }}
-      >
-        {Array.from({ length: 24 }).map((_, index) => (
-          <motion.div
-            key={index}
-            className="grid-item"
-            style={{
-              backgroundImage: `url(${images[index % images.length]})`,
-            }}
-            variants={floatingVariants}
-            initial="initial"
-            animate="animate"
-            whileHover="hover"
-            custom={index}
-            onHoverStart={() => setHoveredIndex(index)}
-            onHoverEnd={() => setHoveredIndex(null)}
-          >
-            <AnimatePresence>
-              {hoveredIndex === index && (
-                <motion.div 
-                  className="grid-item-overlay"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span>Project {index + 1}</span>
-                  <ExternalLink size={14} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Gradient Overlay with Animated Pattern */}
-      <div className="background-overlay">
-        <div className="animated-gradient" />
-        <div className="noise-overlay" />
-      </div>
+      {/* Pure Black Background */}
+      <div className="black-background" />
+      
+      {/* Subtle Gradient Overlay */}
+      <div className="gradient-overlay" />
 
       {/* Floating Particles System */}
       <div className="particles">
-        {[...Array(30)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="particle"
@@ -307,6 +233,18 @@ export default function Intro() {
           />
         ))}
       </div>
+
+      {/* Custom Cursor Glow */}
+      {!isMobile && (
+        <motion.div 
+          className="cursor-glow"
+          animate={{
+            x: cursorPosition.x - 100,
+            y: cursorPosition.y - 100,
+          }}
+          transition={{ type: "spring", damping: 30, stiffness: 200 }}
+        />
+      )}
 
       {/* Glass Card with 3D Tilt Effect */}
       <motion.div
@@ -339,7 +277,7 @@ export default function Intro() {
           <motion.div 
             className="card-glare"
             style={{
-              background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.1) 0%, transparent 50%)`
+              background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.08) 0%, transparent 60%)`
             }}
           />
         )}
@@ -367,7 +305,7 @@ export default function Intro() {
             className="ai-badge"
             style={{ 
               borderColor: roles[currentRole].color,
-              background: `linear-gradient(135deg, ${roles[currentRole].color}20, transparent)`
+              background: `linear-gradient(135deg, ${roles[currentRole].color}15, transparent)`
             }}
             initial={{ opacity: 0, y: -20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -503,7 +441,7 @@ export default function Intro() {
           </motion.button>
 
           <motion.button
-            onClick={handleDownloadCV}
+            onClick={() => setShowCVModal(true)}
             className="secondary-btn"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -527,6 +465,97 @@ export default function Intro() {
           <span>Scroll</span>
         </motion.div>
       </motion.div>
+
+      {/* CV Modal */}
+      <AnimatePresence>
+        {showCVModal && (
+          <motion.div 
+            className="cv-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowCVModal(false)}
+          >
+            <motion.div 
+              className="cv-modal"
+              initial={{ scale: 0.8, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.8, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="cv-modal-header">
+                <div className="cv-modal-icon">
+                  <FileText size={24} />
+                </div>
+                <h3>Curriculum Vitae</h3>
+                <button 
+                  className="cv-modal-close"
+                  onClick={() => setShowCVModal(false)}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="cv-modal-content">
+                <p className="cv-modal-description">
+                  How would you like to view Niftalem's CV?
+                </p>
+
+                <div className="cv-modal-options">
+                  {/* Download Option */}
+                  <motion.button
+                    className="cv-option download-option"
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleDownloadCV}
+                    disabled={isDownloading}
+                  >
+                    <div className="cv-option-icon">
+                      <Download size={32} />
+                    </div>
+                    <div className="cv-option-content">
+                      <h4>Download CV</h4>
+                      <p>Save to your device (PDF, 2.4 MB)</p>
+                    </div>
+                    {isDownloading && (
+                      <motion.div 
+                        className="downloading-spinner"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+                    )}
+                  </motion.button>
+
+                  {/* View in Browser Option */}
+                  <motion.button
+                    className="cv-option view-option"
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleViewCV}
+                  >
+                    <div className="cv-option-icon">
+                      <Eye size={32} />
+                    </div>
+                    <div className="cv-option-content">
+                      <h4>View in Browser</h4>
+                      <p>Open CV in a new tab</p>
+                    </div>
+                  </motion.button>
+                </div>
+
+                {/* Additional Info */}
+                <div className="cv-modal-footer">
+                  <p className="cv-updated">Last updated: March 2026</p>
+                  <p className="cv-format">Format: PDF • Optimized for web & print</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
