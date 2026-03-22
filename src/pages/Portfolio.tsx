@@ -21,7 +21,7 @@ import {
   X,
   Copy,
   Check,
-  Send // Add Telegram icon
+  Send
 } from "lucide-react";
 import "./portfolio.css";
 
@@ -41,8 +41,34 @@ const skills = [
     tools: ["Microservices", "REST APIs", "System Design", "Clean Architecture"] }
 ];
 
-// Experience data from resume with detailed project information
-export const experiences = [
+// Experience data – NEW NiCol entry added at the top
+const experiences = [
+  {
+    title: "Full Stack Developer",
+    company: "NiCol",
+    employmentType: "Freelance",
+    period: "11/2025 - 12/2025",
+    location: "Addis Ababa, Ethiopia",
+    icon: <Code size={20} />,
+    description:
+      "Built and deployed a personal portfolio and technology blog platform using modern web technologies, focusing on performance, SEO, and user experience.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "Vercel"
+    ],
+    achievements: [
+      "Developed a responsive portfolio with server-side rendering and static generation",
+      "Implemented authentication and data management with Supabase",
+      "Optimized SEO with Google sitemap and metadata",
+      "Deployed on Vercel with continuous integration",
+      "Achieved 90+ Lighthouse scores for performance and accessibility"
+    ],
+    github: "https://github.com/Niftalemrex/NiCol-Technology",
+    demo: "https://nicol-technology.vercel.app"
+  },
   {
     title: "Frontend Developer",
     company: "WEMS (Wedding Event Management System)",
@@ -98,7 +124,30 @@ export const experiences = [
   }
 ];
 
-export const projects = [
+// Projects data (no export)
+const projects = [
+  {
+    name: "NiCol Technologies",
+    icon: <Code size={18} />,
+    description:
+      "My personal portfolio website and tech blog built with Next.js, TypeScript, Supabase, and Google sitemap for SEO.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "TailwindCSS",
+      "Google Sitemap"
+    ],
+    features: [
+      "Server-side rendering and static generation",
+      "Authentication with Supabase",
+      "Blog with markdown support",
+      "SEO optimized with sitemap",
+      "Responsive design"
+    ],
+    github: "https://github.com/Niftalemrex/NiCol-Technology",
+    demo: "https://nicol-technology.vercel.app"
+  },
   {
     name: "Wedding Event Management System",
     icon: <Code size={18} />,
@@ -210,11 +259,18 @@ const certifications = [
 
 // GitHub repositories
 const githubRepos = [
-  { name: "WEMS-Wedding-Events-Management-System", description: "Wedding Events Management System", language: "TypeScript", stars: 8, forks: 3 },
-  { name: "Stroke-Prediction-ML", description: "ML model for stroke risk prediction", language: "Python", stars: 15, forks: 6 },
-  { name: "LIMS-Laboratory-Information-Management-System", description: "Laboratory Information Management System", language: "TypeScript", stars: 10, forks: 2 },
+  { name: "WEMS-Wedding-Events-Management-System", description: "Wedding Events Management System", language: "TypeScript", stars: 8, forks: 7 },
+  { name: "Stroke-Prediction-ML", description: "ML model for stroke risk prediction", language: "Python", stars: 9, forks: 6 },
+  { name: "LIMS-Laboratory-Information-Management-System", description: "Laboratory Information Management System", language: "TypeScript", stars: 7, forks: 6 },
   { name: "HIDS", description: "Hospital Information Dissemination System", language: "PHP", stars: 7, forks: 1 },
-  { name: "Webcam_recognize_faces-eyes", description: "Real-time face and eye recognition", language: "Python", stars: 20, forks: 8 }
+  { name: "Webcam_recognize_faces-eyes", description: "Real-time face and eye recognition", language: "Python", stars: 9, forks: 8 },
+  {
+    name: "NiCol-Technology",
+    description: "My personal portfolio website built with Next.js, TypeScript, Supabase, and Google sitemap.",
+    language: "TypeScript",
+    stars: 10,
+    forks: 7
+  }
 ];
 
 export default function Portfolio() {
