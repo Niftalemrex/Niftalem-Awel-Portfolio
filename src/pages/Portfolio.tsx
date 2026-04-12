@@ -44,6 +44,31 @@ const skills = [
 // Experience data – NEW NiCol entry added at the top
 const experiences = [
   {
+  title: "Full Stack Developer",
+    company: "XDose",
+    employmentType: "For Sell",
+    period: "03/2026 - 03/2026",
+    location: "Addis Ababa, Ethiopia",
+    icon: <Briefcase size={20} />,
+    description:
+      "A B2B pharmaceutical marketplace that bridges the gap between pharmacies by enabling real time exchange of medicines, especially overstock and near expiry products. The platform improves inventory utilization, reduces waste, and ensures medicine availability across locations.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Supabase"
+     
+    ],
+    achievements: [
+      "Developed multi role dashboard and Inventory Listing",
+      "Implemented secure authentication and Smart Matching Engine",
+      "Solved Some pharmacies have shortages, others have excess stock",
+      "Solved Pharmacies lose money from expired drugs"
+    ],
+    github: "https://github.com/Niftalemrex/XDose-B2B",
+    demo: "https://x-dose-b2b.vercel.app"
+  },
+  {
     title: "Full Stack Developer",
     company: "NiCol",
     employmentType: "Freelance",
@@ -96,32 +121,7 @@ const experiences = [
     github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
-  {
-    title: "Full Stack Developer",
-    company: "LIMS Project",
-    employmentType: "Internship",
-    period: "02/2024 - 09/2025",
-    location: "Addis Ababa, Ethiopia",
-    icon: <Briefcase size={20} />,
-    description:
-      "Developed an enterprise Laboratory Information Management System for managing lab workflows, sample tracking, and test reporting.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Django",
-      "PostgreSQL",
-      "REST API"
-    ],
-    achievements: [
-      "Developed multi-role dashboard interfaces for laboratory staff",
-      "Implemented secure authentication and role-based access control",
-      "Designed laboratory workflow system for sample lifecycle tracking",
-      "Integrated REST APIs for real-time test result management"
-    ],
-    github: "https://github.com/Niftalemrex/LIMS-Laboratory-Information-Management-System",
-    demo: "https://niftalemrex.github.io/LIMS-Laboratory-Information-Management-System/"
-  }
+  
 ];
 
 
