@@ -1,16 +1,49 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Menu, X, Github, Linkedin, Mail, Home, User, Code2, Briefcase, GraduationCap, Award, BookOpen } from "lucide-react";
+import {
+  Menu,
+  X,
+  Github,
+  Linkedin,
+  Mail,
+  Home,
+  User,
+  Code2,
+  Briefcase,
+  GraduationCap,
+  Award,
+  BookOpen,
+} from "lucide-react";
 import "./navbar.css";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("portfolio-hero");
+  const [progress, setProgress] = useState(0);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Update scroll progress
+      const winScroll = document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      setProgress(winScroll / height);
 
       // Update active section based on scroll position
       const sections = [
@@ -20,9 +53,9 @@ export default function Navbar() {
         "portfolio-experience",
         "portfolio-education",
         "portfolio-certifications",
-        "portfolio-github"
+        "portfolio-github",
       ];
-      
+
       for (const section of sections) {
         const element = document.querySelector(`.${section}`);
         if (element) {
@@ -46,7 +79,7 @@ export default function Navbar() {
     { name: "Experience", href: "#experience", icon: <Briefcase size={18} />, section: "portfolio-experience" },
     { name: "Education", href: "#education", icon: <GraduationCap size={18} />, section: "portfolio-education" },
     { name: "Certifications", href: "#certifications", icon: <Award size={18} />, section: "portfolio-certifications" },
-    { name: "GitHub", href: "#github", icon: <BookOpen size={18} />, section: "portfolio-github" }
+    { name: "GitHub", href: "#github", icon: <BookOpen size={18} />, section: "portfolio-github" },
   ];
 
   const scrollToSection = (sectionClass: string) => {
@@ -66,7 +99,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
       >
         <div className="navbar-container">
-          <motion.div 
+          <motion.div
             className="logo"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -218,10 +251,9 @@ export default function Navbar() {
       </motion.div>
 
       {/* Scroll Progress Indicator */}
-      <motion.div 
+      <motion.div
         className="scroll-progress"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) }}
+        style={{ scaleX: progress }}
         transition={{ duration: 0.1 }}
       />
     </>

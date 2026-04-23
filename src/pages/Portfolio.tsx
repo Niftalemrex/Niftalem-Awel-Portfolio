@@ -23,6 +23,8 @@ import {
   Check,
   Send
 } from "lucide-react";
+import ProjectCarousel from "./ProjectCarousel";
+import type { CarouselProject } from './ProjectCard';
 import "./portfolio.css";
 
 // Skills data from resume
@@ -41,10 +43,10 @@ const skills = [
     tools: ["Microservices", "REST APIs", "System Design", "Clean Architecture"] }
 ];
 
-// Experience data – NEW NiCol entry added at the top
+// Experience data
 const experiences = [
   {
-  title: "Full Stack Developer",
+    title: "Full Stack Developer",
     company: "XDose",
     employmentType: "For Sell",
     period: "03/2026 - 03/2026",
@@ -52,13 +54,7 @@ const experiences = [
     icon: <Briefcase size={20} />,
     description:
       "A B2B pharmaceutical marketplace that bridges the gap between pharmacies by enabling real time exchange of medicines, especially overstock and near expiry products. The platform improves inventory utilization, reduces waste, and ensures medicine availability across locations.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Supabase"
-     
-    ],
+    technologies: ["React", "TypeScript", "Vite", "Supabase"],
     achievements: [
       "Developed multi role dashboard and Inventory Listing",
       "Implemented secure authentication and Smart Matching Engine",
@@ -77,15 +73,9 @@ const experiences = [
     icon: <Code size={20} />,
     description:
       "Built and deployed a personal portfolio and technology blog platform using modern web technologies, focusing on performance, SEO, and user experience.",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Supabase",
-      "Tailwind CSS",
-      "Vercel"
-    ],
+    technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
     achievements: [
-      "Developed a responsive portfolio with server-side rendering and static generation",
+      "Developed a responsive portfolio with server side rendering and static generation",
       "Implemented authentication and data management with Supabase",
       "Optimized SEO with Google sitemap and metadata",
       "Deployed on Vercel with continuous integration",
@@ -102,30 +92,18 @@ const experiences = [
     location: "Addis Ababa, Ethiopia",
     icon: <Code size={20} />,
     description:
-      "Built a modern multi-role wedding management platform that helps couples, vendors, and event managers organize weddings efficiently.",
-    technologies: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Node.js",
-      "Django",
-      "PostgreSQL",
-      "TailwindCSS"
-    ],
+      "Built a modern multi role wedding management platform that helps couples, vendors, and event managers organize weddings efficiently.",
+    technologies: ["React", "TypeScript", "Vite", "Node.js", "Django", "PostgreSQL", "TailwindCSS"],
     achievements: [
       "Implemented complex form handling and validation flows",
-      "Developed JWT-based authentication system",
-      "Built multi-role dashboards (Admin, Couples, Vendors, Managers)",
+      "Developed JWT based authentication system",
+      "Built multi role dashboards (Admin, Couples, Vendors, Managers)",
       "Optimized UI performance for mobile and desktop users"
     ],
     github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
-  
 ];
-
-
-
 
 // Education data
 const education = [
@@ -187,9 +165,64 @@ const githubRepos = [
   }
 ];
 
+// Carousel project data – using the imported CarouselProject type
+const carouselProjects: CarouselProject[] = [
+  {
+    id: 1,
+    title: "XDose B2B Pharma",
+    video: "/videos/XDose.mp4",
+    image: "https://placehold.co/300x450/6366f1/ffffff?text=XDose",
+    backgroundImage: "/videos/XDose-bg.png",   // 👈 large background
+    technologies: ["React", "TypeScript", "Supabase"],
+    github: "https://github.com/Niftalemrex/XDose-B2B",
+    demo: "https://x-dose-b2b.vercel.app"
+  },
+  {
+    id: 2,
+    title: "NiCol Technology",
+    video: "/videos/NiCol SEO.mp4",
+    image: "https://placehold.co/300x450/8b5cf6/ffffff?text=NiCol",
+    backgroundImage: "/videos/NiCol-bg.png",   // 👈 add this for each project
+    technologies: ["Next.js", "TypeScript", "Tailwind"],
+    github: "https://github.com/Niftalemrex/NiCol-Technology",
+    demo: "https://nicol-technology.vercel.app"
+  },
+  {
+    id: 3,
+    title: "NiCol IMS",
+    video: "/videos/IMS.mp4",
+    image: "https://placehold.co/300x450/14b8a6/ffffff?text=IMS",
+    backgroundImage: "/videos/IMS-bg.png",
+    technologies: ["Python", "Scikit-learn", "XGBoost"],
+    github: "https://github.com/Niftalemrex/Stroke-Prediction-ML",
+    demo: "#"
+  },
+  {
+    id: 4,
+    title: "WEMS Wedding",
+    video: "/videos/WEMS.mp4",
+    image: "https://placehold.co/300x450/ec4899/ffffff?text=WEMS",
+    backgroundImage: "/videos/WEMS-bg.png",
+    technologies: ["React", "Django", "PostgreSQL"],
+    github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
+    demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
+  },
+];
+
 export default function Portfolio() {
   const [showContactModal, setShowContactModal] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  
+  // 👇 NEW: State for dynamic carousel background
+  const [carouselBgImage, setCarouselBgImage] = useState<string>(
+    carouselProjects[0]?.backgroundImage || carouselProjects[0]?.image || ''
+  );
+
+  // 👇 NEW: Handler for when a card becomes focused
+  const handleCarouselFocusChange = (project: CarouselProject) => {
+    const bgSource = project.backgroundImage || project.image || '';
+    setCarouselBgImage(bgSource);
+  };
   
   // Refs for scroll animations
   const heroRef = useRef(null);
@@ -198,6 +231,7 @@ export default function Portfolio() {
   const experienceRef = useRef(null);
   const educationRef = useRef(null);
   const certificationsRef = useRef(null);
+  const carouselRef = useRef(null);
   
   const isHeroInView = useInView(heroRef, { once: true });
   const isAboutInView = useInView(aboutRef, { once: true });
@@ -205,6 +239,7 @@ export default function Portfolio() {
   const isExperienceInView = useInView(experienceRef, { once: true });
   const isEducationInView = useInView(educationRef, { once: true });
   const isCertificationsInView = useInView(certificationsRef, { once: true });
+  const isCarouselInView = useInView(carouselRef, { once: true });
 
   // Animation variants
   const fadeInUp = {
@@ -371,7 +406,7 @@ export default function Portfolio() {
               I am a Full Stack and AI Engineer specializing in building scalable web 
               and mobile applications using modern technologies. I focus on clean 
               architecture, secure systems, performance optimization, and integrating 
-              machine learning into real-world solutions.
+              machine learning into real world solutions.
             </p>
           </motion.div>
         </motion.div>
@@ -646,6 +681,58 @@ export default function Portfolio() {
           </div>
         </motion.div>
       </section>
+
+      {/* -------------------- DYNAMIC BACKGROUND CAROUSEL SECTION -------------------- */}
+      <section 
+        ref={carouselRef} 
+        className="portfolio-carousel-showcase"
+        style={{
+          backgroundImage: `url(${carouselBgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          position: 'relative',
+          isolation: 'isolate',
+          transition: 'background-image 0.5s ease-in-out',
+        }}
+      >
+        {/* Dark overlay with blur for readability */}
+        <div 
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(1px)',
+            WebkitBackdropFilter: 'blur(15px)',
+            zIndex: 1,
+          }}
+        />
+        
+        <motion.div
+          className="carousel-showcase-container"
+          initial="hidden"
+          animate={isCarouselInView ? "visible" : "hidden"}
+          variants={staggerContainer}
+          style={{ position: 'relative', zIndex: 2 }}
+        >
+          <motion.div variants={fadeInUp} className="section-header">
+            <span className="section-subtitle">Interactive Showcase</span>
+            <h2 className="section-title">Featured Projects</h2>
+            <div className="section-divider"></div>
+          </motion.div>
+
+          <motion.div variants={fadeInUp}>
+            <ProjectCarousel 
+              projects={carouselProjects} 
+              onFocusChange={handleCarouselFocusChange}   // 👈 Pass the callback
+            />
+          </motion.div>
+        </motion.div>
+      </section>
+      {/* --------------------------------------------------------------------------- */}
 
       {/* CTA Section */}
       <section className="portfolio-cta">
