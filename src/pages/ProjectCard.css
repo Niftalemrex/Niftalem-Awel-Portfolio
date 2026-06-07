@@ -1,0 +1,215 @@
+/* ============================================================
+   PROJECT CARD — Dark Editorial Luxury + Curve
+   ============================================================ */
+
+/* ── Card shell ────────────────────────────────────────────── */
+.project-card {
+  position: absolute;
+  width: 380px;
+  height: 620px;
+  cursor: pointer;
+  will-change: transform, opacity, filter;
+  outline: none;
+  border-radius: 13px; /* ← RECTANGLE WITH CURVE */
+  overflow: hidden;    /* ← Clips media and info to the curve */
+}
+
+/* ── Media container ───────────────────────────────────────── */
+.project-card__media {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #111111;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px; /* ← RECTANGLE WITH CURVE */
+}
+
+/* Focused card gets a gold border + subtle shadow */
+.project-card--focused .project-card__media {
+  border-color: rgba(201, 168, 76, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(201, 168, 76, 0.08),
+    0 32px 80px rgba(0, 0, 0, 0.7);
+}
+
+/* Gold top rule — slides in when card is focused */
+.project-card__top-rule {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c9a84c, rgba(201, 168, 76, 0.2));
+  z-index: 10;
+  animation: ruleReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes ruleReveal {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+/* Media fill */
+.project-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card--focused:hover .project-poster {
+  transform: scale(1.04);
+}
+
+/* ── Info overlay ──────────────────────────────────────────── */
+.project-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.6rem 1.4rem 1.4rem;
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 5, 0.97) 0%,
+    rgba(5, 5, 5, 0.82) 55%,
+    transparent 100%
+  );
+  z-index: 5;
+  animation: infoReveal 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes infoReveal {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Corner ornament — bottom-right bracket */
+.project-info__corner {
+  position: absolute;
+  bottom: 1rem; right: 1rem;
+  width: 14px; height: 14px;
+  border-right: 1px solid rgba(201, 168, 76, 0.45);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.45);
+  pointer-events: none;
+}
+
+/* Label */
+.project-info__label {
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin: 0 0 0.4rem;
+  opacity: 0.8;
+}
+
+/* Title */
+.project-info__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 300;
+  font-style: italic;
+  color: #f0ece2;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* ── Tech tags ─────────────────────────────────────────────── */
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.1rem;
+}
+
+.project-tech__tag {
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: rgba(176, 170, 154, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.18rem 0.55rem;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, color 0.2s ease;
+  border-radius: 6px; /* ← RECTANGLE WITH CURVE (tags) */
+}
+.project-card--focused:hover .project-tech__tag {
+  border-color: rgba(201, 168, 76, 0.22);
+  color: rgba(201, 168, 76, 0.8);
+}
+
+/* ── Links ─────────────────────────────────────────────────── */
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #f0ece2;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 0.4rem 0.85rem;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.25s ease, border-color 0.25s ease;
+  border-radius: 10px; /* ← RECTANGLE WITH CURVE (buttons) */
+}
+.project-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #f0ece2;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+.project-link > * { position: relative; z-index: 1; }
+.project-link:hover { color: #0a0a0a; border-color: #f0ece2; }
+.project-link:hover::before { transform: scaleX(1); }
+
+/* Demo link — gold variant */
+.project-link--demo {
+  color: #c9a84c;
+  border-color: rgba(201, 168, 76, 0.3);
+  background: rgba(201, 168, 76, 0.04);
+}
+.project-link--demo::before { background: #c9a84c; }
+.project-link--demo:hover { color: #0a0a0a; border-color: #c9a84c; }
+
+/* ── Unfocused title strip ─────────────────────────────────── */
+.project-card__strip {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(to top, rgba(5,5,5,0.9) 0%, transparent 100%);
+  z-index: 5;
+}
+.project-card__strip span {
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(176, 170, 154, 0.5);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .project-card {
+    width: 230px;
+    height: 350px;
+  }
+  .project-info__title { font-size: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .project-card {
+    width: 200px;
+    height: 300px;
+  }
+}

@@ -2,12 +2,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { 
-  Code, 
-  Smartphone, 
-  Server, 
-  ArrowRight, 
-  Github, 
+import {
+  Code,
+  Smartphone,
+  Server,
+  ArrowRight,
+  Github,
   ExternalLink,
   Award,
   Briefcase,
@@ -27,39 +27,39 @@ import ProjectCarousel from "./ProjectCarousel";
 import type { CarouselProject } from './ProjectCard';
 import "./portfolio.css";
 
-// Skills data from resume
+/* ── Data ──────────────────────────────────────────────────── */
+
 const skills = [
-  { name: "Frontend Development", icon: <Code size={24} />, level: 90, color: "#6366f1", 
+  { name: "Frontend Development", icon: <Code size={22} />, level: 90, color: "#c9a84c",
     tools: ["TypeScript", "React", "Next.js", "Vite", "Tailwind CSS", "Zustand", "PHP"] },
-  { name: "Backend Development", icon: <Server size={24} />, level: 88, color: "#8b5cf6",
+  { name: "Backend Development", icon: <Server size={22} />, level: 88, color: "#c9a84c",
     tools: ["Node.js", "Express.js", "Django", "FastAPI", "PostgreSQL", "MongoDB", "MySQL", "Firebase"] },
-  { name: "AI/ML Engineering", icon: <Brain size={24} />, level: 85, color: "#ec4899",
+  { name: "AI / ML Engineering", icon: <Brain size={22} />, level: 85, color: "#c9a84c",
     tools: ["Scikit-learn", "XGBoost", "LightGBM", "PyTorch", "TensorFlow", "Keras", "OpenCV", "YOLO", "NLTK", "SpaCy"] },
-  { name: "Mobile Development", icon: <Smartphone size={24} />, level: 82, color: "#14b8a6",
+  { name: "Mobile Development", icon: <Smartphone size={22} />, level: 82, color: "#c9a84c",
     tools: ["Flutter", "React Native", "Dart", "Android"] },
-  { name: "DevOps & Cloud", icon: <Cloud size={24} />, level: 75, color: "#f59e0b",
+  { name: "DevOps & Cloud", icon: <Cloud size={22} />, level: 75, color: "#c9a84c",
     tools: ["Docker", "AWS", "Supabase", "Auth0"] },
-  { name: "System Architecture", icon: <Cpu size={24} />, level: 80, color: "#ef4444",
+  { name: "System Architecture", icon: <Cpu size={22} />, level: 80, color: "#c9a84c",
     tools: ["Microservices", "REST APIs", "System Design", "Clean Architecture"] }
 ];
 
-// Experience data
 const experiences = [
   {
     title: "Full Stack Developer",
     company: "XDose",
     employmentType: "For Sell",
-    period: "03/2026 - 03/2026",
+    period: "03/2026",
     location: "Addis Ababa, Ethiopia",
-    icon: <Briefcase size={20} />,
+    icon: <Briefcase size={18} />,
     description:
-      "A B2B pharmaceutical marketplace that bridges the gap between pharmacies by enabling real time exchange of medicines, especially overstock and near expiry products. The platform improves inventory utilization, reduces waste, and ensures medicine availability across locations.",
+      "A B2B pharmaceutical marketplace bridging the gap between pharmacies — enabling real-time exchange of medicines, especially overstock and near-expiry products. The platform improves inventory utilization, reduces waste, and ensures medicine availability across locations.",
     technologies: ["React", "TypeScript", "Vite", "Supabase"],
     achievements: [
-      "Developed multi role dashboard and Inventory Listing",
-      "Implemented secure authentication and Smart Matching Engine",
-      "Solved Some pharmacies have shortages, others have excess stock",
-      "Solved Pharmacies lose money from expired drugs"
+      "Developed multi-role dashboard and inventory listing system",
+      "Implemented secure authentication and smart matching engine",
+      "Solved the overstock/shortage imbalance across pharmacy chains",
+      "Eliminated revenue loss from expired drug stock"
     ],
     github: "https://github.com/Niftalemrex/XDose-B2B",
     demo: "https://x-dose-b2b.vercel.app"
@@ -68,17 +68,16 @@ const experiences = [
     title: "Full Stack Developer",
     company: "NiCol",
     employmentType: "Freelance",
-    period: "11/2025 - 12/2025",
+    period: "11–12/2025",
     location: "Addis Ababa, Ethiopia",
-    icon: <Code size={20} />,
+    icon: <Code size={18} />,
     description:
-      "Built and deployed a personal portfolio and technology blog platform using modern web technologies, focusing on performance, SEO, and user experience.",
+      "Built and deployed a personal portfolio and technology blog platform using modern web technologies — focusing on performance, SEO, and user experience.",
     technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
     achievements: [
-      "Developed a responsive portfolio with server side rendering and static generation",
+      "Developed responsive portfolio with SSR and static generation",
       "Implemented authentication and data management with Supabase",
-      "Optimized SEO with Google sitemap and metadata",
-      "Deployed on Vercel with continuous integration",
+      "Optimized SEO with Google sitemap and structured metadata",
       "Achieved 90+ Lighthouse scores for performance and accessibility"
     ],
     github: "https://github.com/Niftalemrex/NiCol-Technology",
@@ -86,93 +85,83 @@ const experiences = [
   },
   {
     title: "Frontend Developer",
-    company: "WEMS (Wedding Event Management System)",
+    company: "WEMS",
     employmentType: "Freelance",
-    period: "02/2025 - 05/2025",
+    period: "02–05/2025",
     location: "Addis Ababa, Ethiopia",
-    icon: <Code size={20} />,
+    icon: <Code size={18} />,
     description:
-      "Built a modern multi role wedding management platform that helps couples, vendors, and event managers organize weddings efficiently.",
-    technologies: ["React", "TypeScript", "Vite", "Node.js", "Django", "PostgreSQL", "TailwindCSS"],
+      "Built a modern multi-role wedding management platform helping couples, vendors, and event managers organize weddings efficiently.",
+    technologies: ["React", "TypeScript", "Vite", "Node.js", "Django", "PostgreSQL", "Tailwind CSS"],
     achievements: [
       "Implemented complex form handling and validation flows",
-      "Developed JWT based authentication system",
-      "Built multi role dashboards (Admin, Couples, Vendors, Managers)",
-      "Optimized UI performance for mobile and desktop users"
+      "Developed JWT-based authentication system",
+      "Built multi-role dashboards for Admin, Couples, Vendors, Managers",
+      "Optimized UI performance for both mobile and desktop users"
     ],
     github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
   },
 ];
 
-// Education data
 const education = [
   {
     degree: "Bachelor of Science in Computer Science",
     institution: "St. Mary's University",
-    period: "2022 - 2026",
+    period: "2022 – 2026",
     location: "Addis Ababa, Ethiopia",
-    description: "Graduated with a strong foundation in Computer Science, focusing on software engineering, algorithms, and data structures.",
+    description: "Strong foundation in Computer Science with focus on software engineering, algorithms, and data structures.",
     icon: <GraduationCap size={20} />
   }
 ];
 
-// Certifications with actual links
 const certifications = [
   {
     name: "Artificial Intelligence Fundamentals Nanodegree",
     issuer: "Udacity",
-    period: "02/2025 - 12/2025",
-    icon: <Award size={20} />,
+    period: "02/2025 – 12/2025",
+    icon: <Award size={18} />,
     link: "https://www.udacity.com/certificate/e/ff19f39c-0f27-11f1-a148-7346d43a164b"
   },
   {
     name: "AI Career Essentials",
     issuer: "ALX Africa",
-    period: "03/2025 - 09/2025",
-    icon: <Award size={20} />,
+    period: "03/2025 – 09/2025",
+    icon: <Award size={18} />,
     link: "https://savanna.alxafrica.com/certificates/6NJmEHZRL5"
   },
   {
     name: "Programming Fundamentals Nanodegree",
     issuer: "Udacity",
-    period: "03/2025 - 08/2025",
-    icon: <Award size={20} />,
+    period: "03/2025 – 08/2025",
+    icon: <Award size={18} />,
     link: "https://confirm.udacity.com/e/3b779c46-4c41-11ef-ae47-9fdfa866c280"
   },
   {
     name: "Android Developer Fundamentals Nanodegree",
     issuer: "Udacity",
-    period: "03/2025 - 08/2025",
-    icon: <Award size={20} />,
+    period: "03/2025 – 08/2025",
+    icon: <Award size={18} />,
     link: "https://confirm.udacity.com/NACDEU4C"
   }
 ];
 
-// GitHub repositories
 const githubRepos = [
   { name: "WEMS-Wedding-Events-Management-System", description: "Wedding Events Management System", language: "TypeScript", stars: 8, forks: 7 },
   { name: "Stroke-Prediction-ML", description: "ML model for stroke risk prediction", language: "Python", stars: 9, forks: 6 },
   { name: "LIMS-Laboratory-Information-Management-System", description: "Laboratory Information Management System", language: "TypeScript", stars: 7, forks: 6 },
   { name: "HIDS", description: "Hospital Information Dissemination System", language: "PHP", stars: 7, forks: 1 },
   { name: "Webcam_recognize_faces-eyes", description: "Real-time face and eye recognition", language: "Python", stars: 9, forks: 8 },
-  {
-    name: "NiCol-Technology",
-    description: "My personal portfolio website built with Next.js, TypeScript, Supabase, and Google sitemap.",
-    language: "TypeScript",
-    stars: 10,
-    forks: 7
-  }
+  { name: "NiCol-Technology", description: "Personal portfolio built with Next.js, TypeScript, Supabase, and Google sitemap.", language: "TypeScript", stars: 10, forks: 7 }
 ];
 
-// Carousel project data – using the imported CarouselProject type
 const carouselProjects: CarouselProject[] = [
   {
     id: 1,
     title: "XDose B2B Pharma",
     video: "/videos/XDose.mp4",
-    image: "https://placehold.co/300x450/6366f1/ffffff?text=XDose",
-    backgroundImage: "/videos/XDose-bg.png",   // 👈 large background
+    image: "https://placehold.co/300x450/c9a84c/0a0a0a?text=XDose",
+    backgroundImage: "/videos/XDose-bg.png",
     technologies: ["React", "TypeScript", "Supabase"],
     github: "https://github.com/Niftalemrex/XDose-B2B",
     demo: "https://x-dose-b2b.vercel.app"
@@ -181,8 +170,8 @@ const carouselProjects: CarouselProject[] = [
     id: 2,
     title: "NiCol Technology",
     video: "/videos/NiCol SEO.mp4",
-    image: "https://placehold.co/300x450/8b5cf6/ffffff?text=NiCol",
-    backgroundImage: "/videos/NiCol-bg.png",   // 👈 add this for each project
+    image: "https://placehold.co/300x450/8a6d2f/f0ece2?text=NiCol",
+    backgroundImage: "/videos/NiCol-bg.png",
     technologies: ["Next.js", "TypeScript", "Tailwind"],
     github: "https://github.com/Niftalemrex/NiCol-Technology",
     demo: "https://nicol-technology.vercel.app"
@@ -191,9 +180,9 @@ const carouselProjects: CarouselProject[] = [
     id: 3,
     title: "NiCol IMS",
     video: "/videos/IMS.mp4",
-    image: "https://placehold.co/300x450/14b8a6/ffffff?text=IMS",
+    image: "https://placehold.co/300x450/3a3730/f0ece2?text=IMS",
     backgroundImage: "/videos/IMS-bg.png",
-    technologies: ["Python", "Scikit-learn", "XGBoost"],
+    technologies: ["Flutter", "Mysql"],
     github: "https://github.com/Niftalemrex/Stroke-Prediction-ML",
     demo: "#"
   },
@@ -201,7 +190,7 @@ const carouselProjects: CarouselProject[] = [
     id: 4,
     title: "WEMS Wedding",
     video: "/videos/WEMS.mp4",
-    image: "https://placehold.co/300x450/ec4899/ffffff?text=WEMS",
+    image: "https://placehold.co/300x450/1e1e1e/c9a84c?text=WEMS",
     backgroundImage: "/videos/WEMS-bg.png",
     technologies: ["React", "Django", "PostgreSQL"],
     github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
@@ -209,58 +198,51 @@ const carouselProjects: CarouselProject[] = [
   },
 ];
 
+/* ── Animation Variants ─────────────────────────────────────── */
+const EASE = [0.16, 1, 0.3, 1] as const;
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } }
+};
+
+const scaleIn = {
+  hidden: { scale: 0.96, opacity: 0 },
+  visible: { scale: 1, opacity: 1, transition: { duration: 0.5, ease: EASE } }
+};
+
+/* ── Component ─────────────────────────────────────────────── */
 export default function Portfolio() {
   const [showContactModal, setShowContactModal] = useState(false);
-  const [copiedField, setCopiedField] = useState<string | null>(null);
-  
-  // 👇 NEW: State for dynamic carousel background
-  const [carouselBgImage, setCarouselBgImage] = useState<string>(
+  const [copiedField, setCopiedField]           = useState<string | null>(null);
+  const [carouselBgImage, setCarouselBgImage]   = useState<string>(
     carouselProjects[0]?.backgroundImage || carouselProjects[0]?.image || ''
   );
 
-  // 👇 NEW: Handler for when a card becomes focused
   const handleCarouselFocusChange = (project: CarouselProject) => {
-    const bgSource = project.backgroundImage || project.image || '';
-    setCarouselBgImage(bgSource);
+    setCarouselBgImage(project.backgroundImage || project.image || '');
   };
-  
-  // Refs for scroll animations
-  const heroRef = useRef(null);
-  const aboutRef = useRef(null);
-  const skillsRef = useRef(null);
-  const experienceRef = useRef(null);
-  const educationRef = useRef(null);
+
+  const heroRef           = useRef(null);
+  const aboutRef          = useRef(null);
+  const skillsRef         = useRef(null);
+  const experienceRef     = useRef(null);
+  const educationRef      = useRef(null);
   const certificationsRef = useRef(null);
-  const carouselRef = useRef(null);
-  
-  const isHeroInView = useInView(heroRef, { once: true });
-  const isAboutInView = useInView(aboutRef, { once: true });
-  const isSkillsInView = useInView(skillsRef, { once: true });
-  const isExperienceInView = useInView(experienceRef, { once: true });
-  const isEducationInView = useInView(educationRef, { once: true });
+  const carouselRef       = useRef(null);
+
+  const isHeroInView           = useInView(heroRef,           { once: true });
+  const isAboutInView          = useInView(aboutRef,          { once: true });
+  const isSkillsInView         = useInView(skillsRef,         { once: true });
+  const isExperienceInView     = useInView(experienceRef,     { once: true });
+  const isEducationInView      = useInView(educationRef,      { once: true });
   const isCertificationsInView = useInView(certificationsRef, { once: true });
-  const isCarouselInView = useInView(carouselRef, { once: true });
-
-  // Animation variants
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const scaleIn = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: { scale: 1, opacity: 1 }
-  };
+  const isCarouselInView       = useInView(carouselRef,       { once: true });
 
   const handleCopy = (text: string, field: string) => {
     navigator.clipboard.writeText(text);
@@ -269,122 +251,98 @@ export default function Portfolio() {
   };
 
   const contactInfo = [
-    {
-      type: "Email",
-      value: "niftalemawel@gmail.com",
-      icon: <Mail size={24} />,
-      action: "mailto:niftalemawel@gmail.com",
-      color: "#ea4335"
-    },
-    {
-      type: "Phone",
-      value: "0939193603",
-      icon: <Smartphone size={24} />,
-      action: "tel:0939193603",
-      color: "#34a853"
-    },
-    {
-      type: "Telegram",
-      value: "@Ni_Col67",
-      username: "Ni_Col67",
-      icon: <Send size={24} />,
-      action: "https://t.me/Ni_Col67",
-      color: "#0088cc"
-    },
-    {
-      type: "Location",
-      value: "Addis Ababa, Ethiopia",
-      icon: <MapPin size={24} />,
-      color: "#4285f4"
-    }
+    { type: "Email",    value: "niftalemawel@gmail.com",  icon: <Mail size={20} />,      action: "mailto:niftalemawel@gmail.com" },
+    { type: "Phone",    value: "0939193603",               icon: <Smartphone size={20} />, action: "tel:0939193603" },
+    { type: "Telegram", value: "@Ni_Col67",                icon: <Send size={20} />,       action: "https://t.me/Ni_Col67", username: "Ni_Col67" },
+    { type: "Location", value: "Addis Ababa, Ethiopia",    icon: <MapPin size={20} /> },
   ];
+
+  const langColor: Record<string, string> = {
+    Python: '#3572A5', TypeScript: '#3178C6', PHP: '#8892BE', JavaScript: '#F7DF1E'
+  };
 
   return (
     <>
       <Navbar />
-      
-      {/* Hero Section with Parallax */}
+
+      {/* ── HERO ─────────────────────────────────────────────── */}
       <section ref={heroRef} className="portfolio-hero">
         <div className="hero-background">
           <div className="hero-shape shape-1" />
           <div className="hero-shape shape-2" />
           <div className="hero-shape shape-3" />
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className="hero-content"
           initial="hidden"
           animate={isHeroInView ? "visible" : "hidden"}
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="hero-badge">
-            <span className="badge-pulse"></span>
-            <span>Full Stack | App & AI Engineer</span>
+            <span className="badge-pulse" />
+            <span>Full Stack · App · AI Engineer</span>
           </motion.div>
-          
+
           <motion.h1 variants={fadeInUp}>
             <span className="gradient-text">Niftalem</span>
             <br />
             <span className="gradient-text-alt">Awel</span>
           </motion.h1>
-          
+
           <motion.div variants={fadeInUp} className="hero-contact">
-            <span><Mail size={16} /> niftalemawel@gmail.com</span>
-            <span>•</span>
+            <span><Mail size={12} /> niftalemawel@gmail.com</span>
+            <span>·</span>
             <span>0939193603</span>
-            <span>•</span>
-            <span><Send size={16} /> @Ni_Col67</span>
-            <span>•</span>
-            <span><MapPin size={16} /> Addis Ababa, Ethiopia</span>
+            <span>·</span>
+            <span><Send size={12} /> @Ni_Col67</span>
+            <span>·</span>
+            <span><MapPin size={12} /> Addis Ababa, Ethiopia</span>
           </motion.div>
-          
+
           <motion.p variants={fadeInUp}>
             I build scalable web and mobile applications using modern technologies.
             Focused on clean architecture, secure systems, performance optimization,
             and integrating machine learning into real-world solutions.
           </motion.p>
-          
+
           <motion.div variants={fadeInUp} className="hero-buttons">
-            <motion.a 
+            <motion.a
               href="https://github.com/Niftalemrex"
               target="_blank"
               rel="noopener noreferrer"
               className="github-link"
-              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <Github size={20} />
-              GitHub
+              <Github size={16} /> GitHub
             </motion.a>
-            <motion.a 
+            <motion.a
               href="https://linkedin.com/in/niftalem-awel"
               target="_blank"
               rel="noopener noreferrer"
               className="linkedin-link"
-              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <ExternalLink size={20} />
-              LinkedIn
+              <ExternalLink size={16} /> LinkedIn
             </motion.a>
           </motion.div>
 
           <motion.div variants={fadeInUp} className="hero-stats">
-            <div className="stat-item">
-              <span className="stat-number">1</span>
-              <span className="stat-label">Year Experience</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">5</span>
-              <span className="stat-label">Projects</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">5+</span>
-              <span className="stat-label">Certifications</span>
-            </div>
+            {[
+              { number: "1",  label: "Year Experience" },
+              { number: "5",  label: "Projects Shipped" },
+              { number: "5+", label: "Certifications"   },
+            ].map((s, i) => (
+              <div className="stat-item" key={i}>
+                <span className="stat-number">{s.number}</span>
+                <span className="stat-label">{s.label}</span>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
       </section>
 
-      {/* About Section */}
+      {/* ── ABOUT ────────────────────────────────────────────── */}
       <section ref={aboutRef} className="portfolio-about">
         <motion.div
           className="about-container"
@@ -393,26 +351,23 @@ export default function Portfolio() {
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="section-header">
-            <span className="section-subtitle">Get to know me</span>
+            <span className="section-subtitle">Who I am</span>
             <h2 className="section-title">Profile</h2>
-            <div className="section-divider"></div>
+            <div className="section-divider" />
           </motion.div>
 
-          <motion.div 
-            className="about-text"
-            variants={fadeInUp}
-          >
+          <motion.div variants={fadeInUp} className="about-text">
             <p>
-              I am a Full Stack and AI Engineer specializing in building scalable web 
-              and mobile applications using modern technologies. I focus on clean 
-              architecture, secure systems, performance optimization, and integrating 
-              machine learning into real world solutions.
+              I am a <strong>Full Stack and AI Engineer</strong> specializing in scalable web
+              and mobile applications. I focus on clean architecture, secure systems,
+              performance optimization, and integrating machine learning into
+              real-world solutions.
             </p>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Skills Section */}
+      {/* ── SKILLS ───────────────────────────────────────────── */}
       <section ref={skillsRef} className="portfolio-skills">
         <motion.div
           className="skills-container"
@@ -421,37 +376,32 @@ export default function Portfolio() {
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="section-header">
-            <span className="section-subtitle">What I do best</span>
+            <span className="section-subtitle">Capabilities</span>
             <h2 className="section-title">Technical Skills</h2>
-            <div className="section-divider"></div>
+            <div className="section-divider" />
           </motion.div>
 
           <div className="skills-grid">
-            {skills.map((skill, index) => (
+            {skills.map((skill, i) => (
               <motion.div
-                key={index}
+                key={i}
                 className="skill-card"
                 variants={scaleIn}
-                whileHover={{ y: -5 }}
               >
-                <div className="skill-icon" style={{ color: skill.color }}>
-                  {skill.icon}
-                </div>
+                <div className="skill-icon">{skill.icon}</div>
                 <h3>{skill.name}</h3>
                 <div className="skill-progress">
-                  <motion.div 
+                  <motion.div
                     className="progress-bar"
                     initial={{ width: 0 }}
                     animate={isSkillsInView ? { width: `${skill.level}%` } : { width: 0 }}
-                    transition={{ duration: 1, delay: index * 0.2 }}
-                    style={{ background: skill.color }}
+                    transition={{ duration: 1.2, delay: i * 0.1, ease: EASE }}
                   />
                 </div>
                 <span className="skill-level">{skill.level}%</span>
-                
                 <div className="tools-container">
-                  {skill.tools.slice(0, 5).map((tool, i) => (
-                    <span key={i} className="tool-tag">{tool}</span>
+                  {skill.tools.slice(0, 5).map((t, j) => (
+                    <span key={j} className="tool-tag">{t}</span>
                   ))}
                   {skill.tools.length > 5 && (
                     <span className="tool-tag">+{skill.tools.length - 5}</span>
@@ -463,7 +413,7 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* Experience Section with Detailed Projects */}
+      {/* ── EXPERIENCE ───────────────────────────────────────── */}
       <section ref={experienceRef} className="portfolio-experience">
         <motion.div
           className="experience-container"
@@ -472,69 +422,61 @@ export default function Portfolio() {
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="section-header">
-            <span className="section-subtitle">My Journey</span>
-            <h2 className="section-title">Professional Experience</h2>
-            <div className="section-divider"></div>
+            <span className="section-subtitle">Track record</span>
+            <h2 className="section-title">Experience</h2>
+            <div className="section-divider" />
           </motion.div>
 
           <div className="timeline">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                className="timeline-item"
-                variants={fadeInUp}
-              >
-                <div className="timeline-icon">
-                  {exp.icon}
-                </div>
+            {experiences.map((exp, i) => (
+              <motion.div key={i} className="timeline-item" variants={fadeInUp}>
+                <div className="timeline-icon">{exp.icon}</div>
+
                 <div className="timeline-content">
                   <div className="timeline-header">
                     <h3>{exp.title}</h3>
                     <span className="timeline-period">{exp.period}</span>
                   </div>
-                  <h4>
-                    {exp.company} • {exp.location}
-                  </h4>
-                  <p className="timeline-description">
-                    {exp.description}
-                  </p>
+                  <h4>{exp.company} · {exp.employmentType} · {exp.location}</h4>
+                  <p className="timeline-description">{exp.description}</p>
+
                   <div className="project-technologies">
-                    {exp.technologies.map((tech, i) => (
-                      <span key={i} className="tech-tag">
-                        {tech}
-                      </span>
+                    {exp.technologies.map((t, j) => (
+                      <span key={j} className="tech-tag">{t}</span>
                     ))}
                   </div>
+
                   <div className="experience-achievements">
                     <h5>Key Achievements</h5>
                     <ul>
-                      {exp.achievements.map((achievement, idx) => (
-                        <li key={idx}>{achievement}</li>
+                      {exp.achievements.map((a, j) => (
+                        <li key={j}>{a}</li>
                       ))}
                     </ul>
                   </div>
-                  <div className="experience-links" style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+
+                  <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
                     <motion.a
                       href={exp.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="github-profile-link"
-                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.97 }}
                     >
-                      <Github size={18} />
-                      <span>View Repository</span>
-                      <ExternalLink size={14} />
+                      <Github size={14} />
+                      <span>Repository</span>
+                      <ExternalLink size={11} />
                     </motion.a>
-                    {exp.demo && (
+                    {exp.demo && exp.demo !== '#' && (
                       <motion.a
                         href={exp.demo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="github-profile-link"
-                        whileHover={{ scale: 1.05 }}
-                        style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}
+                        whileTap={{ scale: 0.97 }}
+                        style={{ borderColor: 'rgba(201,168,76,0.35)', color: '#c9a84c' }}
                       >
-                        <ExternalLink size={18} />
+                        <ExternalLink size={14} />
                         <span>Live Demo</span>
                       </motion.a>
                     )}
@@ -546,7 +488,7 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* Education Section */}
+      {/* ── EDUCATION ────────────────────────────────────────── */}
       <section ref={educationRef} className="portfolio-education">
         <motion.div
           className="education-container"
@@ -555,21 +497,15 @@ export default function Portfolio() {
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="section-header">
-            <span className="section-subtitle">Academic background</span>
+            <span className="section-subtitle">Foundation</span>
             <h2 className="section-title">Education</h2>
-            <div className="section-divider"></div>
+            <div className="section-divider" />
           </motion.div>
 
           <div className="education-grid">
-            {education.map((edu, index) => (
-              <motion.div
-                key={index}
-                className="education-card"
-                variants={scaleIn}
-              >
-                <div className="education-icon">
-                  {edu.icon}
-                </div>
+            {education.map((edu, i) => (
+              <motion.div key={i} className="education-card" variants={scaleIn}>
+                <div className="education-icon">{edu.icon}</div>
                 <div className="education-content">
                   <h3>{edu.degree}</h3>
                   <h4>{edu.institution}</h4>
@@ -582,7 +518,7 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* Certifications Section with Links */}
+      {/* ── CERTIFICATIONS ───────────────────────────────────── */}
       <section ref={certificationsRef} className="portfolio-certifications">
         <motion.div
           className="certifications-container"
@@ -593,29 +529,26 @@ export default function Portfolio() {
           <motion.div variants={fadeInUp} className="section-header">
             <span className="section-subtitle">Credentials</span>
             <h2 className="section-title">Certifications</h2>
-            <div className="section-divider"></div>
+            <div className="section-divider" />
           </motion.div>
 
           <div className="certifications-grid">
-            {certifications.map((cert, index) => (
+            {certifications.map((cert, i) => (
               <motion.a
-                key={index}
+                key={i}
                 href={cert.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="certification-card"
                 variants={scaleIn}
-                whileHover={{ y: -5 }}
               >
-                <div className="certification-icon">
-                  {cert.icon}
-                </div>
+                <div className="certification-icon">{cert.icon}</div>
                 <div className="certification-content">
                   <h3>{cert.name}</h3>
                   <p>{cert.issuer}</p>
                   <span className="certification-period">{cert.period}</span>
                   <div className="certification-link">
-                    <LinkIcon size={12} />
+                    <LinkIcon size={11} />
                     <span>View Certificate</span>
                   </div>
                 </div>
@@ -625,56 +558,46 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* GitHub Repositories Section */}
+      {/* ── GITHUB REPOS ─────────────────────────────────────── */}
       <section className="portfolio-github">
         <motion.div
           className="github-container"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7, ease: EASE }}
           viewport={{ once: true }}
         >
           <div className="section-header">
-            <span className="section-subtitle">Open source</span>
-            <h2 className="section-title">GitHub Repositories</h2>
-            <div className="section-divider"></div>
+            <span className="section-subtitle">Open Source</span>
+            <h2 className="section-title">Repositories</h2>
+            <div className="section-divider" />
           </div>
 
           <div className="github-repos-grid">
-            {githubRepos.map((repo, index) => (
+            {githubRepos.map((repo, i) => (
               <motion.a
-                key={index}
+                key={i}
                 href={`https://github.com/Niftalemrex/${repo.name}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="repo-card"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                viewport={{ once: true }}
               >
                 <div className="repo-header">
-                  <Github size={20} />
+                  <Github size={16} />
                   <h3>{repo.name}</h3>
                 </div>
                 <p className="repo-description">{repo.description}</p>
                 <div className="repo-stats">
                   <span className="repo-language">
-                    <span className="language-dot" style={{ 
-                      backgroundColor: 
-                        repo.language === 'Python' ? '#3572A5' :
-                        repo.language === 'JavaScript' ? '#F7DF1E' :
-                        repo.language === 'TypeScript' ? '#3178C6' :
-                        repo.language === 'CSS' ? '#563D7C' : '#6e7681'
-                    }} />
+                    <span className="language-dot" style={{ backgroundColor: langColor[repo.language] ?? '#6e7681' }} />
                     {repo.language}
                   </span>
-                  <span className="repo-stars">
-                    <span>⭐</span> {repo.stars}
-                  </span>
-                  <span className="repo-forks">
-                    <span>⑂</span> {repo.forks}
-                  </span>
+                  <span className="repo-stars">⭐ {repo.stars}</span>
+                  <span className="repo-forks">⑂ {repo.forks}</span>
                 </div>
               </motion.a>
             ))}
@@ -682,9 +605,9 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* -------------------- DYNAMIC BACKGROUND CAROUSEL SECTION -------------------- */}
-      <section 
-        ref={carouselRef} 
+      {/* ── CAROUSEL SHOWCASE ────────────────────────────────── */}
+      <section
+        ref={carouselRef}
         className="portfolio-carousel-showcase"
         style={{
           backgroundImage: `url(${carouselBgImage})`,
@@ -696,21 +619,14 @@ export default function Portfolio() {
           transition: 'background-image 0.5s ease-in-out',
         }}
       >
-        {/* Dark overlay with blur for readability */}
-        <div 
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(1px)',
-            WebkitBackdropFilter: 'blur(15px)',
-            zIndex: 1,
-          }}
-        />
-        
+        <div style={{
+          position: 'absolute', inset: 0,
+          backgroundColor: 'rgba(5,5,5,0.82)',
+          backdropFilter: 'blur(2px)',
+          WebkitBackdropFilter: 'blur(2px)',
+          zIndex: 1,
+        }} />
+
         <motion.div
           className="carousel-showcase-container"
           initial="hidden"
@@ -721,43 +637,41 @@ export default function Portfolio() {
           <motion.div variants={fadeInUp} className="section-header">
             <span className="section-subtitle">Interactive Showcase</span>
             <h2 className="section-title">Featured Projects</h2>
-            <div className="section-divider"></div>
+            <div className="section-divider" />
           </motion.div>
 
           <motion.div variants={fadeInUp}>
-            <ProjectCarousel 
-              projects={carouselProjects} 
-              onFocusChange={handleCarouselFocusChange}   // 👈 Pass the callback
+            <ProjectCarousel
+              projects={carouselProjects}
+              onFocusChange={handleCarouselFocusChange}
             />
           </motion.div>
         </motion.div>
       </section>
-      {/* --------------------------------------------------------------------------- */}
 
-      {/* CTA Section */}
+      {/* ── CTA ──────────────────────────────────────────────── */}
       <section className="portfolio-cta">
         <motion.div
           className="cta-container"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2>Let's Work Together</h2>
-          <p>Have a project in mind? Let's bring your ideas to life.</p>
+          <h2>Let's build something remarkable.</h2>
+          <p>Have a vision? I'll help you engineer it into reality.</p>
           <motion.button
             onClick={() => setShowContactModal(true)}
             className="primary-btn cta-btn"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.97 }}
           >
             Start a Conversation
-            <ArrowRight size={18} />
+            <ArrowRight size={15} />
           </motion.button>
         </motion.div>
       </section>
 
-      {/* Contact Modal */}
+      {/* ── CONTACT MODAL ────────────────────────────────────── */}
       <AnimatePresence>
         {showContactModal && (
           <motion.div
@@ -769,42 +683,38 @@ export default function Portfolio() {
           >
             <motion.div
               className="modal-content"
-              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              initial={{ scale: 0.92, opacity: 0, y: 32 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 50 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
+              exit={{ scale: 0.92, opacity: 0, y: 32 }}
+              transition={{ type: "spring", damping: 28, stiffness: 320 }}
+              onClick={e => e.stopPropagation()}
             >
               <div className="modal-header">
-                <h2>Contact Information</h2>
+                <h2>Get in Touch</h2>
                 <motion.button
                   className="modal-close"
                   onClick={() => setShowContactModal(false)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.93 }}
                 >
-                  <X size={24} />
+                  <X size={18} />
                 </motion.button>
               </div>
 
               <div className="modal-body">
                 <p className="modal-subtitle">
-                  Let's collaborate! Reach out to me through any of these channels:
+                  Let's collaborate. Reach out through any of these channels.
                 </p>
 
                 <div className="contact-cards">
-                  {contactInfo.map((info, index) => (
+                  {contactInfo.map((info, i) => (
                     <motion.div
-                      key={index}
+                      key={i}
                       className="contact-card"
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -16 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      style={{ borderLeftColor: info.color }}
+                      transition={{ delay: i * 0.08 }}
                     >
-                      <div className="contact-icon" style={{ color: info.color }}>
-                        {info.icon}
-                      </div>
+                      <div className="contact-icon">{info.icon}</div>
                       <div className="contact-details">
                         <h3>{info.type}</h3>
                         <p>{info.value}</p>
@@ -815,33 +725,26 @@ export default function Portfolio() {
                               target={info.type === "Telegram" ? "_blank" : undefined}
                               rel={info.type === "Telegram" ? "noopener noreferrer" : undefined}
                               className="contact-action-btn"
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
+                              whileTap={{ scale: 0.96 }}
                             >
-                              {info.type === "Email" && "Send Email"}
-                              {info.type === "Phone" && "Call Now"}
+                              {info.type === "Email"    && "Send Email"}
+                              {info.type === "Phone"    && "Call Now"}
                               {info.type === "Telegram" && "Message on Telegram"}
-                              {info.type === "Location" && "View on Map"}
                             </motion.a>
                           )}
                           {info.type !== "Location" && (
                             <motion.button
                               className="contact-action-btn copy-btn"
-                              onClick={() => handleCopy(info.type === "Telegram" ? info.username || info.value : info.value, info.type)}
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.95 }}
-                            >
-                              {copiedField === info.type ? (
-                                <>
-                                  <Check size={16} />
-                                  <span>Copied!</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Copy size={16} />
-                                  <span>Copy</span>
-                                </>
+                              onClick={() => handleCopy(
+                                info.type === "Telegram" ? (info as any).username ?? info.value : info.value,
+                                info.type
                               )}
+                              whileTap={{ scale: 0.96 }}
+                            >
+                              {copiedField === info.type
+                                ? <><Check size={13} /> <span>Copied</span></>
+                                : <><Copy size={13} />  <span>Copy</span></>
+                              }
                             </motion.button>
                           )}
                         </div>
@@ -851,37 +754,16 @@ export default function Portfolio() {
                 </div>
 
                 <div className="modal-footer">
-                  <p>Connect with me on other platforms:</p>
+                  <p>Also on</p>
                   <div className="social-links-modal">
-                    <motion.a
-                      href="https://github.com/Niftalemrex"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-link github"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Github size={20} />
+                    <motion.a href="https://github.com/Niftalemrex" target="_blank" rel="noopener noreferrer" className="social-link github" whileTap={{ scale: 0.93 }}>
+                      <Github size={18} />
                     </motion.a>
-                    <motion.a
-                      href="https://linkedin.com/in/niftalem-awel"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-link linkedin"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ExternalLink size={20} />
+                    <motion.a href="https://linkedin.com/in/niftalem-awel" target="_blank" rel="noopener noreferrer" className="social-link linkedin" whileTap={{ scale: 0.93 }}>
+                      <ExternalLink size={18} />
                     </motion.a>
-                    <motion.a
-                      href="https://t.me/Ni_Col67"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-link telegram"
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <Send size={20} />
+                    <motion.a href="https://t.me/Ni_Col67" target="_blank" rel="noopener noreferrer" className="social-link telegram" whileTap={{ scale: 0.93 }}>
+                      <Send size={18} />
                     </motion.a>
                   </div>
                 </div>

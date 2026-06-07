@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useSpring, useScroll } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
   Menu,
@@ -16,51 +16,47 @@ import {
 } from "lucide-react";
 import "./navbar.css";
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("portfolio-hero");
-  const [progress, setProgress] = useState(0);
+const navItems = [
+  { name: "Home",           href: "portfolio-hero",           icon: <Home size={14} /> },
+  { name: "Profile",        href: "portfolio-about",          icon: <User size={14} /> },
+  { name: "Skills",         href: "portfolio-skills",         icon: <Code2 size={14} /> },
+  { name: "Experience",     href: "portfolio-experience",     icon: <Briefcase size={14} /> },
+  { name: "Education",      href: "portfolio-education",      icon: <GraduationCap size={14} /> },
+  { name: "Certifications", href: "portfolio-certifications", icon: <Award size={14} /> },
+  { name: "GitHub",         href: "portfolio-github",         icon: <BookOpen size={14} /> },
+];
 
-  // Lock body scroll when mobile menu is open
+const socials = [
+  { href: "https://github.com/Niftalemrex",       icon: <Github size={16} />,   label: "GitHub"   },
+  { href: "https://linkedin.com/in/niftalem-awel", icon: <Linkedin size={16} />, label: "LinkedIn" },
+  { href: "mailto:niftalemawel@gmail.com",          icon: <Mail size={16} />,     label: "Email"    },
+];
+
+export default function Navbar() {
+  const [isOpen,         setIsOpen]         = useState(false);
+  const [scrolled,       setScrolled]       = useState(false);
+  const [activeSection,  setActiveSection]  = useState("portfolio-hero");
+
+  // Smooth scroll progress using Framer Motion's useScroll + useSpring
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
+
+  // Lock body scroll when mobile menu open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60);
 
-      // Update scroll progress
-      const winScroll = document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      setProgress(winScroll / height);
-
-      // Update active section based on scroll position
-      const sections = [
-        "portfolio-hero",
-        "portfolio-about",
-        "portfolio-skills",
-        "portfolio-experience",
-        "portfolio-education",
-        "portfolio-certifications",
-        "portfolio-github",
-      ];
-
+      const sections = navItems.map(i => i.href);
       for (const section of sections) {
-        const element = document.querySelector(`.${section}`);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
+        const el = document.querySelector(`.${section}`);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
             setActiveSection(section);
             break;
           }
@@ -68,194 +64,185 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = [
-    { name: "Home", href: "#home", icon: <Home size={18} />, section: "portfolio-hero" },
-    { name: "Profile", href: "#about", icon: <User size={18} />, section: "portfolio-about" },
-    { name: "Skills", href: "#skills", icon: <Code2 size={18} />, section: "portfolio-skills" },
-    { name: "Experience", href: "#experience", icon: <Briefcase size={18} />, section: "portfolio-experience" },
-    { name: "Education", href: "#education", icon: <GraduationCap size={18} />, section: "portfolio-education" },
-    { name: "Certifications", href: "#certifications", icon: <Award size={18} />, section: "portfolio-certifications" },
-    { name: "GitHub", href: "#github", icon: <BookOpen size={18} />, section: "portfolio-github" },
-  ];
-
-  const scrollToSection = (sectionClass: string) => {
+  const scrollTo = (section: string) => {
     setIsOpen(false);
-    const element = document.querySelector(`.${sectionClass}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    document.querySelector(`.${section}`)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <>
+      {/* ── Nav bar ──────────────────────────────────────────── */}
       <motion.nav
-        className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+        className={`navbar${scrolled ? " navbar-scrolled" : ""}`}
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0,   opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="navbar-container">
-          <motion.div
-            className="logo"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => scrollToSection("portfolio-hero")}
-          >
-            <span className="logo-text">NIFTALEM</span>
-            <span className="logo-dot"></span>
-          </motion.div>
 
-          {/* Desktop Menu */}
-          <ul className="nav-links">
-            {navItems.map((item, index) => (
+          {/* Logo */}
+          <button
+            className="logo"
+            onClick={() => scrollTo("portfolio-hero")}
+            aria-label="Go to top"
+          >
+            <span className="logo-name">N</span>
+            <span className="logo-sep" />
+            <span className="logo-sub">Awel</span>
+          </button>
+
+          {/* Desktop nav */}
+          <ul className="nav-links" role="list">
+            {navItems.map((item, i) => (
               <motion.li
                 key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1,  y: 0 }}
+                transition={{ delay: 0.05 + i * 0.06, ease: [0.16, 1, 0.3, 1], duration: 0.5 }}
               >
-                <motion.a
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.section);
-                  }}
-                  whileHover={{ y: -2 }}
-                  className={`nav-link ${activeSection === item.section ? "active" : ""}`}
+                <button
+                  className={`nav-link${activeSection === item.href ? " active" : ""}`}
+                  onClick={() => scrollTo(item.href)}
                 >
-                  <span className="nav-icon">{item.icon}</span>
-                  {item.name}
-                </motion.a>
+                  <span className="nav-icon" aria-hidden="true">{item.icon}</span>
+                  <span>{item.name}</span>
+                  {activeSection === item.href && (
+                    <motion.span
+                      className="nav-link-dot"
+                      layoutId="nav-dot"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                </button>
               </motion.li>
             ))}
           </ul>
 
-          {/* Desktop Social Links */}
+          {/* Desktop socials */}
           <div className="nav-social">
-            <motion.a
-              href="https://github.com/Niftalemrex"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="social-icon"
-              title="GitHub"
-            >
-              <Github size={18} />
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com/in/niftalem-awel"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="social-icon"
-              title="LinkedIn"
-            >
-              <Linkedin size={18} />
-            </motion.a>
-            <motion.a
-              href="mailto:niftalemawel@gmail.com"
-              whileHover={{ y: -3, scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="social-icon"
-              title="Email"
-            >
-              <Mail size={18} />
-            </motion.a>
+            {socials.map(s => (
+              <motion.a
+                key={s.label}
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="social-icon"
+                aria-label={s.label}
+                whileTap={{ scale: 0.9 }}
+              >
+                {s.icon}
+              </motion.a>
+            ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Hamburger */}
           <motion.button
             className="mobile-menu-btn"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsOpen(v => !v)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
             whileTap={{ scale: 0.9 }}
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <motion.span
+              animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="burger-line"
+            />
+            <motion.span
+              animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.2 }}
+              className="burger-line"
+            />
+            <motion.span
+              animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="burger-line"
+            />
           </motion.button>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile drawer ────────────────────────────────────── */}
       <motion.div
-        className={`mobile-menu ${isOpen ? "open" : ""}`}
+        className="mobile-menu"
         initial={false}
         animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: "100%" }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        aria-hidden={!isOpen}
       >
+        {/* Top rule */}
+        <div className="mobile-menu-rule" />
+
         <div className="mobile-menu-content">
-          <ul className="mobile-nav-links">
-            {navItems.map((item, index) => (
+
+          {/* Mono label */}
+          <p className="mobile-menu-label">Navigation</p>
+
+          <ul className="mobile-nav-links" role="list">
+            {navItems.map((item, i) => (
               <motion.li
                 key={item.name}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isOpen ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                transition={{ delay: i * 0.05, ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
               >
-                <a
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(item.section);
-                  }}
-                  className={`mobile-nav-link ${activeSection === item.section ? "active" : ""}`}
+                <button
+                  className={`mobile-nav-link${activeSection === item.href ? " active" : ""}`}
+                  onClick={() => scrollTo(item.href)}
                 >
-                  <span className="mobile-nav-icon">{item.icon}</span>
-                  {item.name}
-                </a>
+                  <span className="mobile-nav-icon" aria-hidden="true">{item.icon}</span>
+                  <span>{item.name}</span>
+                  {activeSection === item.href && (
+                    <span className="mobile-active-rule" />
+                  )}
+                </button>
               </motion.li>
             ))}
           </ul>
 
+          {/* Divider */}
+          <div className="mobile-divider" />
+
+          {/* Socials */}
           <div className="mobile-social">
-            <motion.a
-              href="https://github.com/Niftalemrex"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="mobile-social-icon"
-              title="GitHub"
-            >
-              <Github size={22} />
-            </motion.a>
-            <motion.a
-              href="https://linkedin.com/in/niftalem-awel"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="mobile-social-icon"
-              title="LinkedIn"
-            >
-              <Linkedin size={22} />
-            </motion.a>
-            <motion.a
-              href="mailto:niftalemawel@gmail.com"
-              whileHover={{ scale: 1.1 }}
-              className="mobile-social-icon"
-              title="Email"
-            >
-              <Mail size={22} />
-            </motion.a>
+            {socials.map(s => (
+              <a
+                key={s.label}
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="mobile-social-icon"
+                aria-label={s.label}
+              >
+                {s.icon}
+              </a>
+            ))}
           </div>
 
+          {/* Contact strip */}
           <div className="mobile-contact">
-            <p>niftalemawel@gmail.com</p>
-            <p>0939193603</p>
-            <p>Addis Ababa, Ethiopia</p>
+            <span>niftalemawel@gmail.com</span>
+            <span className="mobile-contact-sep">·</span>
+            <span>Addis Ababa, Ethiopia</span>
           </div>
         </div>
       </motion.div>
 
-      {/* Scroll Progress Indicator */}
-      <motion.div
-        className="scroll-progress"
-        style={{ scaleX: progress }}
-        transition={{ duration: 0.1 }}
-      />
+      {/* Click-outside backdrop */}
+      {isOpen && (
+        <div
+          className="mobile-backdrop"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* ── Scroll progress bar ───────────────────────────────── */}
+      <motion.div className="scroll-progress" style={{ scaleX }} />
     </>
   );
 }

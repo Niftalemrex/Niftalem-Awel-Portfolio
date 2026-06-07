@@ -1,50 +1,135 @@
+/* ============================================================
+   PROJECT CAROUSEL — Dark Editorial Luxury + Curve
+   ============================================================ */
+
+/* ── Outer wrapper ─────────────────────────────────────────── */
 .project-carousel {
-    margin-top: 2rem;
-    perspective: 1200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.8rem;
+  width: 100%;
+  padding: 2rem 0 1rem;
+  user-select: none;
+}
+
+/* ── Card stage ────────────────────────────────────────────── */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 520px;          /* card height + breathing room */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+/* ── Controls row ──────────────────────────────────────────── */
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+/* Arrows — more curve */
+.carousel-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(240, 236, 226, 0.45);
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px; /* ← RECTANGLE WITH CURVE */
+}
+.carousel-arrow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(201, 168, 76, 0.08);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.carousel-arrow:hover {
+  border-color: rgba(201, 168, 76, 0.45);
+  color: #c9a84c;
+}
+.carousel-arrow:hover::before { transform: scaleX(1); }
+.carousel-arrow:active { transform: scale(0.94); }
+.carousel-arrow svg { position: relative; z-index: 1; }
+
+/* Dot indicators — more curve (rounded rectangles) */
+.carousel-indicators {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px; /* ← RECTANGLE WITH CURVE (was 0) */
+  background: rgba(255, 255, 255, 0.18);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.indicator.active {
+  background: #c9a84c;
+  width: 20px;               /* extends on active — like a progress pill */
+  transform: scaleY(1);
+}
+.indicator:hover:not(.active) {
+  background: rgba(201, 168, 76, 0.4);
+}
+
+/* ── Counter ───────────────────────────────────────────────── */
+.carousel-counter {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: rgba(176, 170, 154, 0.55);
+  margin: 0;
+}
+.carousel-counter span:first-child {
+  color: #c9a84c;
+}
+.carousel-counter-sep {
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
   .carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 500px;
-    position: relative;
-    width: 100%;
-    transform-style: preserve-3d;
-    pointer-events: none; /* container ignores clicks */
+    height: 440px;
   }
-  
-  .carousel-container .project-card {
-    pointer-events: auto; /* cards capture clicks */
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
   }
-  
-  .carousel-indicators {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 2rem;
-    pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+  .carousel-container {
+    height: 380px;
   }
-  
-  .indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    padding: 0;
-  }
-  
-  .indicator.active {
-    background: #6366f1;
-    transform: scale(1.3);
-  }
-  
-  .indicator:hover {
-    background: rgba(255, 255, 255, 0.6);
-  }
+}
