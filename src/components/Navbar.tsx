@@ -1,8 +1,7 @@
 import { motion, useSpring, useScroll } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
-  Menu,
-  X,
+ 
   Github,
   Linkedin,
   Mail,
