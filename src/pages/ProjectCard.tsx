@@ -24,28 +24,33 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, offset, isFocused, onClick }) => {
   const absOffset = Math.abs(offset);
-
-  // ★ FIX: Calculate if we are on a mobile screen
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 480;
 
-  // ★ FIX: If offset is too far, push it completely out of sight so it doesn't cause zoom-out
-  // On mobile, offsets of 2 are completely hidden to prevent "pushing" the screen
-  const safeOffset = isMobile && absOffset > 1 ? Math.sign(offset) * 2 : offset;
-  const safeAbsOffset = Math.abs(safeOffset);
+  // ★ CRITICAL: Determine if the card is off-screen (Safety cutoff)
+  const isOffscreen = absOffset > 2;
+
+  // ★ DYNAMIC OFFSET: Reduce drag distance on mobile so it doesn't push the screen
+  let effectiveOffset = offset;
+  if (isMobile) {
+    // Clamp the offset so it doesn't stretch infinitely
+    if (effectiveOffset > 2) effectiveOffset = 2;
+    if (effectiveOffset < -2) effectiveOffset = -2;
+  }
 
   const style: React.CSSProperties = {
     transform: `
-      translateX(${safeOffset * (isMobile ? 120 : 200)}px)
-      scale(${isFocused ? 1 : 1 - safeAbsOffset * 0.08})
-      translateZ(${isFocused ? 0 : -safeAbsOffset * 40}px)
-      rotateY(${safeOffset * (isMobile ? 1 : 3)}deg)
+      translateX(${effectiveOffset * (isMobile ? 110 : 180)}px)
+      scale(${isFocused ? 1 : 1 - absOffset * 0.08})
+      translateZ(${isFocused ? 0 : -absOffset * 40}px)
+      rotateY(${effectiveOffset * (isMobile ? 1 : 3)}deg)
     `,
-    zIndex: isFocused ? 20 : 10 - safeAbsOffset,
-    // ★ FIX: Fade out cards that are offset too far (makes them invisible & stops pushing)
-    opacity: safeAbsOffset > 1.5 ? 0 : safeAbsOffset === 1 ? 0.5 : 1,
-    pointerEvents: safeAbsOffset > 1.5 ? 'none' : 'auto',
-    filter: isFocused ? 'none' : `blur(${safeAbsOffset * 0.5}px)`,
-    transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease, filter 0.45s ease',
+    zIndex: isFocused ? 20 : 10 - absOffset,
+    // ★ FIX: Fade and physically hide offscreen cards
+    opacity: isOffscreen ? 0 : (absOffset === 2 ? 0.3 : 1),
+    visibility: isOffscreen ? 'hidden' : 'visible', // ★ Removes from DOM rendering
+    pointerEvents: isOffscreen ? 'none' : 'auto',
+    filter: isFocused ? 'none' : `blur(${absOffset * 0.5}px)`,
+    transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease, filter 0.45s ease, visibility 0.45s ease',
   };
 
   return (
@@ -98,7 +103,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, offset, isFocused, o
             </div>
           )}
 
-          {/* ★ NEW: Security Score (Green) */}
+          {/* Security Score (Green) */}
           {project.securityScore && (
             <div className="project-security-score">
               <Shield size={12} /> {project.securityScore}
