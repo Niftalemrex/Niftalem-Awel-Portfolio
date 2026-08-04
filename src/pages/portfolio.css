@@ -315,7 +315,6 @@
    ::-webkit-scrollbar-thumb { background: var(--gold-dim); }
    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
    
-   /* ── Responsive ────────────────────────────────────────────── */
    @media (max-width: 768px) {
      .hero-content h1 { font-size: clamp(3.5rem, 18vw, 6rem); }
      .hero-stats { gap: 0; flex-wrap: wrap; }

@@ -129,7 +129,8 @@
 }
 
 @media (max-width: 480px) {
+  /* ★ FIX: Force smaller container on mobile so it doesn't force zoom out */
   .carousel-container {
-    height: 380px;
+    height: 350px !important;
   }
 }
