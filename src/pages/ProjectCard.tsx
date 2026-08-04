@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, Lock, Shield } from 'lucide-react'; // ← Added Shield
 import './ProjectCard.css';
 
 export interface CarouselProject {
@@ -11,6 +11,8 @@ export interface CarouselProject {
   technologies: string[];
   github: string;
   demo: string;
+  securityBadge?: string;  // ← Security tag
+  securityScore?: string;  // ★ NEW: Security score (e.g. "A+")
 }
 
 interface ProjectCardProps {
@@ -78,6 +80,21 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, offset, isFocused, o
 
           <p className="project-info__label">Featured Project</p>
           <h3 className="project-info__title">{project.title}</h3>
+
+          {/* Security Badge (Gold) */}
+          {project.securityBadge && (
+            <div className="project-security-badge">
+              <Lock size={12} />
+              <span>{project.securityBadge}</span>
+            </div>
+          )}
+
+          {/* ★ NEW: Security Score (Green) */}
+          {project.securityScore && (
+            <div className="project-security-score">
+              <Shield size={12} /> {project.securityScore}
+            </div>
+          )}
 
           <div className="project-tech">
             {project.technologies.slice(0, 3).map((tech, i) => (

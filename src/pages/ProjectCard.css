@@ -111,6 +111,28 @@
   letter-spacing: -0.01em;
 }
 
+/* ── ★ NEW: SECURITY BADGE ────────────────────────────────── */
+.project-security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  padding: 0.25rem 0.7rem;
+  background: rgba(201, 168, 76, 0.06);
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  width: fit-content;
+}
+
+.project-security-badge svg {
+  opacity: 0.8;
+}
+
 /* ── Tech tags ─────────────────────────────────────────────── */
 .project-tech {
   display: flex;

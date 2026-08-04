@@ -1,5 +1,5 @@
 /* ============================================================
-   NAVBAR — Dark Editorial Luxury + Pill Shape
+   NAVBAR — Dark Editorial Luxury + Pill Shape (Desktop)
    ============================================================ */
 
 /* ── Shell ─────────────────────────────────────────────────── */
@@ -203,21 +203,19 @@
   transform-origin: center;
 }
 
-/* ── Mobile drawer — pill-shaped left edge ────────────────── */
+/* ── Mobile drawer — FLAT RECTANGLE (FIXED) ──────────────── */
 .mobile-menu {
   display: none;
   position: fixed;
-  top: 12px;
-  right: 12px;
+  top: 0;
+  right: 0;
   width: min(320px, 85vw);
-  height: calc(100vh - 24px);
+  height: 100vh;
   background: #0f0f0f;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
   z-index: 999;
   overflow-y: auto;
-  border-radius: 9999px; /* ← PILL SHAPE */
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 0; /* ← FLAT RECTANGLE, NO CURVES */
 }
 
 .mobile-menu-rule {
@@ -230,7 +228,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  min-height: calc(100vh - 2px);
+  min-height: 100vh;
 }
 
 .mobile-menu-label {
@@ -306,7 +304,7 @@
   margin: 1.8rem 0 1.4rem;
 }
 
-/* Mobile socials — pill shape */
+/* Mobile socials */
 .mobile-social {
   display: flex;
   gap: 0.6rem;
@@ -322,7 +320,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   text-decoration: none;
   transition: all 0.25s ease;
-  border-radius: 9999px; /* ← PILL SHAPE */
+  border-radius: 9999px; /* ← Keep pill for icons only */
 }
 .mobile-social-icon:hover {
   color: #c9a84c;
@@ -386,10 +384,18 @@
     display: block;
   }
 
+  /* Mobile Navbar: Remove pill shape — full width */
   .navbar-scrolled {
     height: 56px;
     padding: 0 0.3rem;
-    border-radius: 9999px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    top: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
   }
 }
 

@@ -14,14 +14,16 @@ import {
   GraduationCap,
   Mail,
   MapPin,
-  Brain,
+  Shield,      
   Cloud,
   Cpu,
+  Lock,        
   Link as LinkIcon,
   X,
   Copy,
   Check,
-  Send
+  Send,
+  Target      // ← Added icon for Hack The Box
 } from "lucide-react";
 import ProjectCarousel from "./ProjectCarousel";
 import type { CarouselProject } from './ProjectCard';
@@ -34,14 +36,21 @@ const skills = [
     tools: ["TypeScript", "React", "Next.js", "Vite", "Tailwind CSS", "Zustand", "PHP"] },
   { name: "Backend Development", icon: <Server size={22} />, level: 88, color: "#c9a84c",
     tools: ["Node.js", "Express.js", "Django", "FastAPI", "PostgreSQL", "MongoDB", "MySQL", "Firebase"] },
-  { name: "AI / ML Engineering", icon: <Brain size={22} />, level: 85, color: "#c9a84c",
+  { name: "AI / ML Engineering", icon: <Shield size={22} />, level: 85, color: "#c9a84c",
     tools: ["Scikit-learn", "XGBoost", "LightGBM", "PyTorch", "TensorFlow", "Keras", "OpenCV", "YOLO", "NLTK", "SpaCy"] },
   { name: "Mobile Development", icon: <Smartphone size={22} />, level: 82, color: "#c9a84c",
     tools: ["Flutter", "React Native", "Dart", "Android"] },
   { name: "DevOps & Cloud", icon: <Cloud size={22} />, level: 75, color: "#c9a84c",
     tools: ["Docker", "AWS", "Supabase", "Auth0"] },
   { name: "System Architecture", icon: <Cpu size={22} />, level: 80, color: "#c9a84c",
-    tools: ["Microservices", "REST APIs", "System Design", "Clean Architecture"] }
+    tools: ["Microservices", "REST APIs", "System Design", "Clean Architecture"] },
+  { 
+    name: "Cyber Security & DevSecOps", 
+    icon: <Lock size={22} />, 
+    level: 78, 
+    color: "#c9a84c",
+    tools: ["JWT / OAuth 2.0", "CORS & CSRF Protection", "Data Encryption", "Input Sanitization", "Helmet.js", "OWASP Top 10", "Secure Cookies", "HTTPS/TLS"] 
+  }
 ];
 
 const experiences = [
@@ -52,14 +61,14 @@ const experiences = [
     period: "03/2026",
     location: "Addis Ababa, Ethiopia",
     icon: <Briefcase size={18} />,
-    description:
-      "A B2B pharmaceutical marketplace bridging the gap between pharmacies — enabling real-time exchange of medicines, especially overstock and near-expiry products. The platform improves inventory utilization, reduces waste, and ensures medicine availability across locations.",
+    description: "A B2B pharmaceutical marketplace bridging the gap between pharmacies — enabling real-time exchange of medicines, especially overstock and near-expiry products. The platform improves inventory utilization, reduces waste, and ensures medicine availability across locations.",
     technologies: ["React", "TypeScript", "Vite", "Supabase"],
     achievements: [
       "Developed multi-role dashboard and inventory listing system",
       "Implemented secure authentication and smart matching engine",
       "Solved the overstock/shortage imbalance across pharmacy chains",
-      "Eliminated revenue loss from expired drug stock"
+      "Eliminated revenue loss from expired drug stock",
+      "Implemented JWT blacklisting and strict CORS policies to protect sensitive medical data"
     ],
     github: "https://github.com/Niftalemrex/XDose-B2B",
     demo: "https://x-dose-b2b.vercel.app"
@@ -71,14 +80,14 @@ const experiences = [
     period: "11–12/2025",
     location: "Addis Ababa, Ethiopia",
     icon: <Code size={18} />,
-    description:
-      "Built and deployed a personal portfolio and technology blog platform using modern web technologies — focusing on performance, SEO, and user experience.",
+    description: "Built and deployed a personal portfolio and technology blog platform using modern web technologies — focusing on performance, SEO, and user experience.",
     technologies: ["Next.js", "TypeScript", "Supabase", "Tailwind CSS", "Vercel"],
     achievements: [
       "Developed responsive portfolio with SSR and static generation",
       "Implemented authentication and data management with Supabase",
       "Optimized SEO with Google sitemap and structured metadata",
-      "Achieved 90+ Lighthouse scores for performance and accessibility"
+      "Achieved 90+ Lighthouse scores for performance and accessibility",
+      "Secured API endpoints and implemented HTTPS enforcement for all data transactions"
     ],
     github: "https://github.com/Niftalemrex/NiCol-Technology",
     demo: "https://nicol-technology.vercel.app"
@@ -90,14 +99,14 @@ const experiences = [
     period: "02–05/2025",
     location: "Addis Ababa, Ethiopia",
     icon: <Code size={18} />,
-    description:
-      "Built a modern multi-role wedding management platform helping couples, vendors, and event managers organize weddings efficiently.",
+    description: "Built a modern multi-role wedding management platform helping couples, vendors, and event managers organize weddings efficiently.",
     technologies: ["React", "TypeScript", "Vite", "Node.js", "Django", "PostgreSQL", "Tailwind CSS"],
     achievements: [
       "Implemented complex form handling and validation flows",
       "Developed JWT-based authentication system",
       "Built multi-role dashboards for Admin, Couples, Vendors, Managers",
-      "Optimized UI performance for both mobile and desktop users"
+      "Optimized UI performance for both mobile and desktop users",
+      "Implemented role-based access control (RBAC) and encrypted session management"
     ],
     github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
     demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
@@ -164,7 +173,9 @@ const carouselProjects: CarouselProject[] = [
     backgroundImage: "/videos/XDose-bg.png",
     technologies: ["React", "TypeScript", "Supabase"],
     github: "https://github.com/Niftalemrex/XDose-B2B",
-    demo: "https://x-dose-b2b.vercel.app"
+    demo: "https://x-dose-b2b.vercel.app",
+    securityBadge: "JWT Auth · CORS Protected",
+    securityScore: "A+ (OWASP Compliant)"
   },
   {
     id: 2,
@@ -174,7 +185,9 @@ const carouselProjects: CarouselProject[] = [
     backgroundImage: "/videos/NiCol-bg.png",
     technologies: ["Next.js", "TypeScript", "Tailwind"],
     github: "https://github.com/Niftalemrex/NiCol-Technology",
-    demo: "https://nicol-technology.vercel.app"
+    demo: "https://nicol-technology.vercel.app",
+    securityBadge: "Supabase Auth · HTTPS",
+    securityScore: "A+ (OWASP Compliant)"
   },
   {
     id: 3,
@@ -194,7 +207,9 @@ const carouselProjects: CarouselProject[] = [
     backgroundImage: "/videos/WEMS-bg.png",
     technologies: ["React", "Django", "PostgreSQL"],
     github: "https://github.com/Niftalemrex/WEMS-Wedding-Events-Management-System",
-    demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/"
+    demo: "https://niftalemrex.github.io/WEMS-Wedding-Events-Management-System/",
+    securityBadge: "JWT · RBAC",
+    securityScore: "A (RBAC & JWT)"
   },
 ];
 
@@ -279,9 +294,36 @@ export default function Portfolio() {
           animate={isHeroInView ? "visible" : "hidden"}
           variants={staggerContainer}
         >
+          {/* Network Topology */}
+          <motion.div 
+            className="network-topology"
+            variants={fadeInUp}
+          >
+            <svg viewBox="0 0 200 100" width="80" height="40">
+              <circle cx="20" cy="50" r="3" fill="#c9a84c" />
+              <circle cx="100" cy="30" r="3" fill="#f0ece2" />
+              <circle cx="180" cy="70" r="3" fill="#c9a84c" />
+              <line x1="20" y1="50" x2="100" y2="30" stroke="rgba(201,168,76,0.4)" strokeWidth="0.5" strokeDasharray="2 2" />
+              <line x1="100" y1="30" x2="180" y2="70" stroke="rgba(201,168,76,0.4)" strokeWidth="0.5" strokeDasharray="2 2" />
+            </svg>
+          </motion.div>
+
           <motion.div variants={fadeInUp} className="hero-badge">
-            <span className="badge-pulse" />
-            <span>Full Stack · App · AI Engineer</span>
+            {/* ★ GREEN BLINKING DOT (using Shield icon) */}
+            <span className="badge-pulse">
+              <Shield size={12} />
+            </span>
+            <span>Full Stack · App · AI </span>
+            
+            {/* Cyber Security Gold Tag */}
+            <motion.span 
+              className="hero-badge-cyber"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <Lock size={12} /> Cyber Security
+            </motion.span>
           </motion.div>
 
           <motion.h1 variants={fadeInUp}>
@@ -301,11 +343,13 @@ export default function Portfolio() {
           </motion.div>
 
           <motion.p variants={fadeInUp}>
-            I build scalable web and mobile applications using modern technologies.
-            Focused on clean architecture, secure systems, performance optimization,
-            and integrating machine learning into real-world solutions.
+            I build secure, scalable web and mobile applications using modern technologies. 
+            Expert in clean architecture, AI/ML integration, and implementing 
+            <strong> robust security protocols </strong> to protect data and systems 
+            in real-world environments.
           </motion.p>
 
+          {/* ── HERO BUTTONS ─────────────────────────────────────── */}
           <motion.div variants={fadeInUp} className="hero-buttons">
             <motion.a
               href="https://github.com/Niftalemrex"
@@ -324,6 +368,16 @@ export default function Portfolio() {
               whileTap={{ scale: 0.97 }}
             >
               <ExternalLink size={16} /> LinkedIn
+            </motion.a>
+            {/* ★ NEW: Hack The Box Button */}
+            <motion.a
+              href="https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="htb-link"
+              whileTap={{ scale: 0.97 }}
+            >
+              <Target size={16} /> HTB
             </motion.a>
           </motion.div>
 
@@ -354,11 +408,34 @@ export default function Portfolio() {
             <span className="section-subtitle">Who I am</span>
             <h2 className="section-title">Profile</h2>
             <div className="section-divider" />
+            
+            {/* Security Stats Bar */}
+            <motion.div 
+              className="security-stats-container"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: EASE }}
+              viewport={{ once: true }}
+              style={{ marginTop: '1.5rem' }}
+            >
+              <div className="security-stat-item">
+                <Shield size={16} /> 
+                <span><strong>100%</strong> Secure API Rate</span>
+              </div>
+              <div className="security-stat-item">
+                <Lock size={16} /> 
+                <span><strong>0</strong> OWASP Top 10 Vulnerabilities</span>
+              </div>
+              <div className="security-stat-item">
+                <Code size={16} /> 
+                <span><strong>JWT / RBAC</strong> Implemented</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           <motion.div variants={fadeInUp} className="about-text">
             <p>
-              I am a <strong>Full Stack and AI Engineer</strong> specializing in scalable web
+              I am a <strong>Full Stack, AI, and Cyber Security Engineer</strong> specializing in scalable web
               and mobile applications. I focus on clean architecture, secure systems,
               performance optimization, and integrating machine learning into
               real-world solutions.
@@ -764,6 +841,10 @@ export default function Portfolio() {
                     </motion.a>
                     <motion.a href="https://t.me/Ni_Col67" target="_blank" rel="noopener noreferrer" className="social-link telegram" whileTap={{ scale: 0.93 }}>
                       <Send size={18} />
+                    </motion.a>
+                    {/* ★ NEW: Hack The Box in Contact Modal */}
+                    <motion.a href="https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb" target="_blank" rel="noopener noreferrer" className="social-link htb" whileTap={{ scale: 0.93 }}>
+                      <Target size={18} />
                     </motion.a>
                   </div>
                 </div>

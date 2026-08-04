@@ -1,7 +1,6 @@
 import { motion, useSpring, useScroll } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
- 
   Github,
   Linkedin,
   Mail,
@@ -12,6 +11,7 @@ import {
   GraduationCap,
   Award,
   BookOpen,
+  Target, // ← Added for Hack The Box
 } from "lucide-react";
 import "./navbar.css";
 
@@ -28,6 +28,7 @@ const navItems = [
 const socials = [
   { href: "https://github.com/Niftalemrex",       icon: <Github size={16} />,   label: "GitHub"   },
   { href: "https://linkedin.com/in/niftalem-awel", icon: <Linkedin size={16} />, label: "LinkedIn" },
+  { href: "https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb", icon: <Target size={16} />, label: "Hack The Box" },
   { href: "mailto:niftalemawel@gmail.com",          icon: <Mail size={16} />,     label: "Email"    },
 ];
 
@@ -36,11 +37,9 @@ export default function Navbar() {
   const [scrolled,       setScrolled]       = useState(false);
   const [activeSection,  setActiveSection]  = useState("portfolio-hero");
 
-  // Smooth scroll progress using Framer Motion's useScroll + useSpring
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
-  // Lock body scroll when mobile menu open
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -74,7 +73,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ── Nav bar ──────────────────────────────────────────── */}
       <motion.nav
         className={`navbar${scrolled ? " navbar-scrolled" : ""}`}
         initial={{ y: -80, opacity: 0 }}
@@ -82,8 +80,6 @@ export default function Navbar() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="navbar-container">
-
-          {/* Logo */}
           <button
             className="logo"
             onClick={() => scrollTo("portfolio-hero")}
@@ -94,7 +90,6 @@ export default function Navbar() {
             <span className="logo-sub">Awel</span>
           </button>
 
-          {/* Desktop nav */}
           <ul className="nav-links" role="list">
             {navItems.map((item, i) => (
               <motion.li
@@ -121,7 +116,6 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Desktop socials */}
           <div className="nav-social">
             {socials.map(s => (
               <motion.a
@@ -138,7 +132,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Hamburger */}
           <motion.button
             className="mobile-menu-btn"
             onClick={() => setIsOpen(v => !v)}
@@ -166,19 +159,16 @@ export default function Navbar() {
       </motion.nav>
 
       {/* ── Mobile drawer ────────────────────────────────────── */}
+      {/* ✅ SIMPLE SLIDE ANIMATION */}
       <motion.div
         className="mobile-menu"
         initial={false}
-        animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: "100%" }}
+        animate={isOpen ? { x: 0, opacity: 1 } : { x: "100%", opacity: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         aria-hidden={!isOpen}
       >
-        {/* Top rule */}
         <div className="mobile-menu-rule" />
-
         <div className="mobile-menu-content">
-
-          {/* Mono label */}
           <p className="mobile-menu-label">Navigation</p>
 
           <ul className="mobile-nav-links" role="list">
@@ -203,10 +193,7 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Divider */}
           <div className="mobile-divider" />
-
-          {/* Socials */}
           <div className="mobile-social">
             {socials.map(s => (
               <a
@@ -221,8 +208,6 @@ export default function Navbar() {
               </a>
             ))}
           </div>
-
-          {/* Contact strip */}
           <div className="mobile-contact">
             <span>niftalemawel@gmail.com</span>
             <span className="mobile-contact-sep">·</span>
@@ -231,7 +216,6 @@ export default function Navbar() {
         </div>
       </motion.div>
 
-      {/* Click-outside backdrop */}
       {isOpen && (
         <div
           className="mobile-backdrop"
@@ -240,7 +224,6 @@ export default function Navbar() {
         />
       )}
 
-      {/* ── Scroll progress bar ───────────────────────────────── */}
       <motion.div className="scroll-progress" style={{ scaleX }} />
     </>
   );
