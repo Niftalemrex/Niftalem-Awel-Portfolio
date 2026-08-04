@@ -17,7 +17,8 @@ import {
   Award,
   FileText,
   Eye,
-  X
+  X,
+  Target // ← Added for Hack The Box
 } from "lucide-react";
 import "./intro.css";
 
@@ -101,15 +102,15 @@ export default function Intro() {
 
   const roles: Role[] = [
     { 
-      label: "AI Engineer", 
+      label: "AI & Cyber Security Engineer", // ← Updated title
       icon: <Sparkles size={14} />, 
-      description: "Building intelligent systems with ML & NLP",
+      description: "Building secure intelligent systems with ML & NLP",
       color: "#c9a84c",
     },
     { 
       label: "Full-Stack Engineer", 
       icon: <Code size={14} />, 
-      description: "Creating scalable web applications",
+      description: "Creating scalable and secure web applications",
       color: "#b09060",
     },
     { 
@@ -334,7 +335,9 @@ export default function Intro() {
           {[
             { icon: <Github size={18} />, href: "https://github.com/Niftalemrex", label: "GitHub" },
             { icon: <Linkedin size={18} />, href: "https://linkedin.com/in/niftalem-awel", label: "LinkedIn" },
-            { icon: <Mail size={18} />, href: "mailto:niftalemawel@gmail.com", label: "Email" }
+            { icon: <Mail size={18} />, href: "mailto:niftalemawel@gmail.com", label: "Email" },
+            // ★ Added Hack The Box link here
+            { icon: <Target size={18} />, href: "https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb", label: "Hack The Box" }
           ].map((s, i) => (
             <motion.a
               key={i}
