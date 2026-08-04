@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, ExternalLink, Lock, Shield } from 'lucide-react'; // ← Added Shield
+import { Github, ExternalLink, Lock, Shield } from 'lucide-react';
 import './ProjectCard.css';
 
 export interface CarouselProject {
@@ -11,8 +11,8 @@ export interface CarouselProject {
   technologies: string[];
   github: string;
   demo: string;
-  securityBadge?: string;  // ← Security tag
-  securityScore?: string;  // ★ NEW: Security score (e.g. "A+")
+  securityBadge?: string;
+  securityScore?: string;
 }
 
 interface ProjectCardProps {
@@ -25,18 +25,27 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, offset, isFocused, onClick }) => {
   const absOffset = Math.abs(offset);
 
+  // ★ FIX: Calculate if we are on a mobile screen
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 480;
+
+  // ★ FIX: If offset is too far, push it completely out of sight so it doesn't cause zoom-out
+  // On mobile, offsets of 2 are completely hidden to prevent "pushing" the screen
+  const safeOffset = isMobile && absOffset > 1 ? Math.sign(offset) * 2 : offset;
+  const safeAbsOffset = Math.abs(safeOffset);
+
   const style: React.CSSProperties = {
     transform: `
-      translateX(${offset * 200}px)
-      scale(${isFocused ? 1 : 1 - absOffset * 0.1})
-      translateZ(${isFocused ? 0 : -absOffset * 50}px)
-      rotateY(${offset * 3}deg)
+      translateX(${safeOffset * (isMobile ? 120 : 200)}px)
+      scale(${isFocused ? 1 : 1 - safeAbsOffset * 0.08})
+      translateZ(${isFocused ? 0 : -safeAbsOffset * 40}px)
+      rotateY(${safeOffset * (isMobile ? 1 : 3)}deg)
     `,
-    zIndex:        isFocused ? 20 : 10 - absOffset,
-    opacity:       absOffset > 2 ? 0 : absOffset === 2 ? 0.35 : absOffset === 1 ? 0.65 : 1,
-    pointerEvents: absOffset > 2 ? 'none' : 'auto',
-    filter:        isFocused ? 'none' : `blur(${absOffset * 0.6}px)`,
-    transition:    'transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease, filter 0.45s ease',
+    zIndex: isFocused ? 20 : 10 - safeAbsOffset,
+    // ★ FIX: Fade out cards that are offset too far (makes them invisible & stops pushing)
+    opacity: safeAbsOffset > 1.5 ? 0 : safeAbsOffset === 1 ? 0.5 : 1,
+    pointerEvents: safeAbsOffset > 1.5 ? 'none' : 'auto',
+    filter: isFocused ? 'none' : `blur(${safeAbsOffset * 0.5}px)`,
+    transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease, filter 0.45s ease',
   };
 
   return (
