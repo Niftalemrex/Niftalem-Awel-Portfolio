@@ -343,17 +343,33 @@
    
    @media (max-width: 480px) {
      .certifications-grid { grid-template-columns: 1fr; }
-     .hero-buttons { flex-direction: column; align-items: center; }
+     .hero-buttons { 
+       flex-direction: column; 
+       align-items: center; 
+       width: 100%;       
+       gap: 0.6rem;       
+     }
+     .github-link, .linkedin-link, .htb-link {
+       width: 100%;       
+       justify-content: center;
+     }
      
-     /* ★ FIX: Shrink the Network Topology graphic so it doesn't push things */
+     /* ★ FIX: Force the Hero Content to fill the phone screen */
+     .hero-content {
+       max-width: 100%;   
+       width: 100%;
+       padding: 0 1rem;   
+     }
+     
+     /* ★ FIX: Shrink the Network Topology graphic */
      .network-topology {
-       margin-bottom: 0.5rem; /* Pull it slightly closer to the badge */
-       text-align: center;     /* ★ CENTER IT ON MOBILE */
-       width: 100%;            /* ★ SPAN FULL WIDTH */
+       margin-bottom: 0.5rem;
+       text-align: center;     
+       width: 100%;            
      }
      .network-topology svg {
-       width: 50px;  /* Shrink the width from 80px to 50px */
-       height: 25px; /* Shrink the height from 40px to 25px */
+       width: 50px;  
+       height: 25px; 
      }
 
      /* ★ FIX: Adjust 3 stats to stay side-by-side */
@@ -362,6 +378,7 @@
        gap: 0;
        padding-top: 1.5rem;
        justify-content: center;
+       width: 100%;
      }
      .stat-item {
        padding: 0 0.8rem;
@@ -374,10 +391,10 @@
        border-bottom: none;
      }
      .stat-number {
-       font-size: 1.8rem;
+       font-size: 1.5rem; /* Shrink numbers slightly */
      }
      .stat-label {
-       font-size: 0.55rem;
+       font-size: 0.5rem; /* Shrink label text slightly */
        letter-spacing: 0.08em;
      }
 
@@ -388,6 +405,8 @@
        gap: 0.4rem;
        margin-bottom: 1.5rem;
        flex-wrap: nowrap;
+       width: 100%;
+       justify-content: center;
      }
      .badge-pulse {
        width: 14px;
@@ -396,6 +415,12 @@
      .badge-pulse svg {
        width: 6px;
        height: 6px;
+     }
+     
+     /* ★ FIX: Shrink main paragraph for better mobile reading */
+     .hero-content > p {
+       font-size: 0.9rem; 
+       padding: 0 0.5rem;
      }
    }
    
