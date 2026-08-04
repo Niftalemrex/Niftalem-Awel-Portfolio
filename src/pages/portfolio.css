@@ -365,6 +365,13 @@
        padding-right: 1rem !important;
      }
    
+     /* ★ CRITICAL FIX: Remove min-height to stop browser zoom-out */
+     .portfolio-hero {
+       min-height: auto !important;
+       padding-top: 5rem !important; /* Add padding so navbar doesn't overlap */
+       padding-bottom: 3rem !important;
+     }
+   
      .certifications-grid { grid-template-columns: 1fr; }
      
      .hero-buttons { 
