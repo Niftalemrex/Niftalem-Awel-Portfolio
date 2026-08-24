@@ -337,7 +337,7 @@ export default function Portfolio() {
             <span>·</span>
             <span>0939193603</span>
             <span>·</span>
-            <span><Send size={12} /> @Ni_Col67</span>
+            <span><Send size={12} /> @Zz_nicol</span>
             <span>·</span>
             <span><MapPin size={12} /> Addis Ababa, Ethiopia</span>
           </motion.div>
