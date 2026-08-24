@@ -268,7 +268,7 @@ export default function Portfolio() {
   const contactInfo = [
     { type: "Email",    value: "niftalemawel@gmail.com",  icon: <Mail size={20} />,      action: "mailto:niftalemawel@gmail.com" },
     { type: "Phone",    value: "0939193603",               icon: <Smartphone size={20} />, action: "tel:0939193603" },
-    { type: "Telegram", value: "@Ni_Col67",                icon: <Send size={20} />,       action: "https://t.me/Ni_Col67", username: "Ni_Col67" },
+    { type: "Telegram", value: "@Zz_nicol",                icon: <Send size={20} />,       action: "https://t.me/Ni_Col67", username: "Ni_Col67" },
     { type: "Location", value: "Addis Ababa, Ethiopia",    icon: <MapPin size={20} /> },
   ];
 
@@ -839,7 +839,7 @@ export default function Portfolio() {
                     <motion.a href="https://linkedin.com/in/niftalem-awel" target="_blank" rel="noopener noreferrer" className="social-link linkedin" whileTap={{ scale: 0.93 }}>
                       <ExternalLink size={18} />
                     </motion.a>
-                    <motion.a href="https://t.me/Ni_Col67" target="_blank" rel="noopener noreferrer" className="social-link telegram" whileTap={{ scale: 0.93 }}>
+                    <motion.a href="https://t.me/Zz_nicol" target="_blank" rel="noopener noreferrer" className="social-link telegram" whileTap={{ scale: 0.93 }}>
                       <Send size={18} />
                     </motion.a>
                     {/* ★ NEW: Hack The Box in Contact Modal */}

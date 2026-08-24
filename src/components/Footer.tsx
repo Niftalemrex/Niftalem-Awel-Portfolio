@@ -123,7 +123,7 @@ export default function Footer() {
                 <Linkedin size={20} />
               </motion.a>
               <motion.a
-                href="https://t.me/Ni_Col67"
+                href="https://t.me/Zz_nicol"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -5, scale: 1.1 }}
@@ -170,7 +170,7 @@ export default function Footer() {
                   Email Me
                 </motion.a>
                 <motion.a
-                  href="https://t.me/Ni_Col67"
+                  href="https://t.me/Zz_nicol"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="lets-talk-btn secondary"
