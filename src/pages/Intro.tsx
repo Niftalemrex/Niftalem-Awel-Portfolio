@@ -187,8 +187,8 @@ export default function Intro() {
             initial="initial"
             animate="animate"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${(i * 17) % 100}%`,
+              top: `${(i * 23) % 100}%`,
             }}
           />
         ))}

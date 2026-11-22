@@ -1,60 +1,44 @@
-import { motion, useSpring, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import {
+  ArrowUpRight,
+  Menu,
+  X,
+  Mail,
+  Shield,
+  Award,
   Github,
   Linkedin,
-  Mail,
-  Home,
-  User,
-  Code2,
-  Briefcase,
-  GraduationCap,
-  Award,
-  BookOpen,
-  Target, // ← Added for Hack The Box
+  Target,
+  Send
 } from "lucide-react";
 import "./navbar.css";
 
+interface NavbarProps {
+  onOpenContact?: () => void;
+}
+
 const navItems = [
-  { name: "Home",           href: "portfolio-hero",           icon: <Home size={14} /> },
-  { name: "Profile",        href: "portfolio-about",          icon: <User size={14} /> },
-  { name: "Skills",         href: "portfolio-skills",         icon: <Code2 size={14} /> },
-  { name: "Experience",     href: "portfolio-experience",     icon: <Briefcase size={14} /> },
-  { name: "Education",      href: "portfolio-education",      icon: <GraduationCap size={14} /> },
-  { name: "Certifications", href: "portfolio-certifications", icon: <Award size={14} /> },
-  { name: "GitHub",         href: "portfolio-github",         icon: <BookOpen size={14} /> },
+  { name: "About",          href: "portfolio-about" },
+  { name: "Skills",         href: "portfolio-skills" },
+  { name: "Experience",     href: "portfolio-experience" },
+  { name: "Projects",       href: "portfolio-projects" },
+  { name: "Education",      href: "portfolio-education" },
+  { name: "Certifications", href: "portfolio-certifications" },
 ];
 
-const socials = [
-  { href: "https://github.com/Niftalemrex",       icon: <Github size={16} />,   label: "GitHub"   },
-  { href: "https://linkedin.com/in/niftalem-awel", icon: <Linkedin size={16} />, label: "LinkedIn" },
-  { href: "https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb", icon: <Target size={16} />, label: "Hack The Box" },
-  { href: "mailto:niftalemawel@gmail.com",          icon: <Mail size={16} />,     label: "Email"    },
-];
-
-export default function Navbar() {
-  const [isOpen,         setIsOpen]         = useState(false);
-  const [scrolled,       setScrolled]       = useState(false);
-  const [activeSection,  setActiveSection]  = useState("portfolio-hero");
-
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+export default function Navbar({ onOpenContact }: NavbarProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 60);
-
       const sections = navItems.map(i => i.href);
       for (const section of sections) {
         const el = document.querySelector(`.${section}`);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
+          if (rect.top <= 140 && rect.bottom >= 140) {
             setActiveSection(section);
             break;
           }
@@ -72,159 +56,187 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      <motion.nav
-        className={`navbar${scrolled ? " navbar-scrolled" : ""}`}
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="navbar-container">
+    <header className="kirubel-header">
+      <div className="kirubel-header-inner">
+        {/* Brand */}
+        <button
+          className="kirubel-header-brand"
+          onClick={() => scrollTo("portfolio-hero")}
+          aria-label="Go to top"
+        >
+          <span className="kirubel-brand-name">Niftalem</span>
+        </button>
+
+        {/* Center Nav Links (Desktop) */}
+        <nav className="kirubel-header-nav">
+          {navItems.map((item) => (
+            <button
+              key={item.name}
+              className={`kirubel-header-link ${activeSection === item.href ? "active" : ""}`}
+              onClick={() => scrollTo(item.href)}
+            >
+              {item.name}
+            </button>
+          ))}
+        </nav>
+
+        {/* Right: Socials (GitHub, HTB, LinkedIn, Telegram) + Contact */}
+        <div className="kirubel-header-actions">
+          <div className="kirubel-header-socials">
+            <a
+              href="https://github.com/Niftalemrex"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kirubel-header-icon-link"
+              title="GitHub"
+              aria-label="GitHub"
+            >
+              <Github size={15} />
+            </a>
+            <a
+              href="https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kirubel-header-icon-link htb-icon"
+              title="Hack The Box"
+              aria-label="Hack The Box"
+            >
+              <Target size={15} />
+            </a>
+            <a
+              href="https://linkedin.com/in/niftalem-awel"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kirubel-header-icon-link"
+              title="LinkedIn"
+              aria-label="LinkedIn"
+            >
+              <Linkedin size={15} />
+            </a>
+            <a
+              href="https://t.me/Zz_nicol"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kirubel-header-icon-link"
+              title="Telegram"
+              aria-label="Telegram"
+            >
+              <Send size={15} />
+            </a>
+          </div>
+
           <button
-            className="logo"
-            onClick={() => scrollTo("portfolio-hero")}
-            aria-label="Go to top"
+            type="button"
+            className="kirubel-header-contact-btn"
+            onClick={() => {
+              if (onOpenContact) {
+                onOpenContact();
+              } else {
+                scrollTo("portfolio-cta");
+              }
+            }}
           >
-            <span className="logo-name">N</span>
-            <span className="logo-sep" />
-            <span className="logo-sub">Awel</span>
+            <Mail size={12} />
+            <span>Contact</span>
           </button>
 
-          <ul className="nav-links" role="list">
-            {navItems.map((item, i) => (
-              <motion.li
-                key={item.name}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1,  y: 0 }}
-                transition={{ delay: 0.05 + i * 0.06, ease: [0.16, 1, 0.3, 1], duration: 0.5 }}
-              >
-                <button
-                  className={`nav-link${activeSection === item.href ? " active" : ""}`}
-                  onClick={() => scrollTo(item.href)}
-                >
-                  <span className="nav-icon" aria-hidden="true">{item.icon}</span>
-                  <span>{item.name}</span>
-                  {activeSection === item.href && (
-                    <motion.span
-                      className="nav-link-dot"
-                      layoutId="nav-dot"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                </button>
-              </motion.li>
-            ))}
-          </ul>
-
-          <div className="nav-social">
-            {socials.map(s => (
-              <motion.a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="social-icon"
-                aria-label={s.label}
-                whileTap={{ scale: 0.9 }}
-              >
-                {s.icon}
-              </motion.a>
-            ))}
-          </div>
-
-          <motion.button
-            className="mobile-menu-btn"
-            onClick={() => setIsOpen(v => !v)}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
-            whileTap={{ scale: 0.9 }}
+          {/* Mobile Menu Toggle */}
+          <button
+            className="kirubel-mobile-btn"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
           >
-            <motion.span
-              animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="burger-line"
-            />
-            <motion.span
-              animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.2 }}
-              className="burger-line"
-            />
-            <motion.span
-              animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="burger-line"
-            />
-          </motion.button>
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
-      </motion.nav>
+      </div>
 
-      {/* ── Mobile drawer ────────────────────────────────────── */}
-      {/* ✅ SIMPLE SLIDE ANIMATION */}
-      <motion.div
-        className="mobile-menu"
-        initial={false}
-        animate={isOpen ? { x: 0, opacity: 1 } : { x: "100%", opacity: 0 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        aria-hidden={!isOpen}
-      >
-        <div className="mobile-menu-rule" />
-        <div className="mobile-menu-content">
-          <p className="mobile-menu-label">Navigation</p>
-
-          <ul className="mobile-nav-links" role="list">
-            {navItems.map((item, i) => (
-              <motion.li
-                key={item.name}
-                initial={{ opacity: 0, x: 20 }}
-                animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                transition={{ delay: i * 0.05, ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
-              >
-                <button
-                  className={`mobile-nav-link${activeSection === item.href ? " active" : ""}`}
-                  onClick={() => scrollTo(item.href)}
-                >
-                  <span className="mobile-nav-icon" aria-hidden="true">{item.icon}</span>
-                  <span>{item.name}</span>
-                  {activeSection === item.href && (
-                    <span className="mobile-active-rule" />
-                  )}
-                </button>
-              </motion.li>
-            ))}
-          </ul>
-
-          <div className="mobile-divider" />
-          <div className="mobile-social">
-            {socials.map(s => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                className="mobile-social-icon"
-                aria-label={s.label}
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
-          <div className="mobile-contact">
-            <span>niftalemawel@gmail.com</span>
-            <span className="mobile-contact-sep">·</span>
-            <span>Addis Ababa, Ethiopia</span>
-          </div>
-        </div>
-      </motion.div>
-
+      {/* Mobile Drawer */}
       {isOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setIsOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+        <motion.div
+          className="kirubel-mobile-menu"
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="kirubel-mobile-menu-inner">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                className="kirubel-mobile-link"
+                onClick={() => scrollTo(item.href)}
+              >
+                {item.name}
+              </button>
+            ))}
 
-      <motion.div className="scroll-progress" style={{ scaleX }} />
-    </>
+            <div className="kirubel-mobile-divider" />
+
+            <div className="kirubel-mobile-socials-row">
+              <a
+                href="https://github.com/Niftalemrex"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="kirubel-mobile-icon-pill"
+              >
+                <Github size={14} />
+                <span>GitHub</span>
+              </a>
+              <a
+                href="https://profile.hackthebox.com/profile/019ecb1f-d7a4-7071-b515-989292ede1fb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="kirubel-mobile-icon-pill"
+              >
+                <Target size={14} />
+                <span>Hack The Box</span>
+              </a>
+              <a
+                href="https://linkedin.com/in/niftalem-awel"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="kirubel-mobile-icon-pill"
+              >
+                <Linkedin size={14} />
+                <span>LinkedIn</span>
+              </a>
+              <a
+                href="https://t.me/Zz_nicol"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="kirubel-mobile-icon-pill"
+              >
+                <Send size={14} />
+                <span>Telegram</span>
+              </a>
+            </div>
+
+            <div className="kirubel-mobile-divider" />
+
+            <a
+              href="https://cybersecurity-report-gray.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kirubel-mobile-ext-link"
+            >
+              <Shield size={14} />
+              <span>Security Reports Hub</span>
+              <ArrowUpRight size={13} />
+            </a>
+            <a
+              href="https://niftalem-certificates.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kirubel-mobile-ext-link"
+            >
+              <Award size={14} />
+              <span>Certificates Platform</span>
+              <ArrowUpRight size={13} />
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </header>
   );
 }

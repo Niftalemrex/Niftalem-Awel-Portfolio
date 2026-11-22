@@ -1,406 +1,248 @@
 /* ============================================================
-   NAVBAR — Dark Editorial Luxury + Pill Shape (Desktop)
+   NAVBAR — Kirubel Kibru Reference Design
+   Sticky, minimal height (48px), max-w-3xl, backdrop blur
+   Includes GitHub, HTB, LinkedIn, Telegram socials
    ============================================================ */
 
-/* ── Shell ─────────────────────────────────────────────────── */
-.navbar {
-  position: fixed;
+.kirubel-header {
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  background: transparent;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ── Scrolled state — floating pill ───────────────────────── */
-.navbar-scrolled {
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 9999px; /* ← PILL SHAPE */
-  width: fit-content;
-  max-width: 90%;
-  margin: 0 auto;
-  top: 16px;
-  left: 0;
-  right: 0;
-  height: 60px;
-  padding: 0 0.5rem;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-}
-.navbar-scrolled .navbar-container {
-  gap: 0.5rem;
-  padding: 0 0.5rem;
-}
-
-.navbar-container {
+  z-index: 60;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  height: 3rem; /* 48px */
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* ── Logo ──────────────────────────────────────────────────── */
-.logo {
+.kirubel-header-inner {
+  max-width: 52rem;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.kirubel-header-brand {
   background: none;
   border: none;
-  cursor: pointer;
   padding: 0;
-  flex-shrink: 0;
-  text-decoration: none;
-}
-
-.logo-name {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  font-style: italic;
-  color: #c9a84c;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.logo-sep {
-  display: inline-block;
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.logo-sub {
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(176, 170, 154, 0.6);
-}
-
-/* ── Desktop nav links — pill shape ────────────────────────── */
-.nav-links {
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.1rem;
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
 }
 
-.nav-link {
+.kirubel-brand-name {
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  transition: opacity 0.2s ease;
+}
+
+.kirubel-header-brand:hover .kirubel-brand-name {
+  opacity: 0.8;
+}
+
+/* Nav links desktop */
+.kirubel-header-nav {
+  display: none;
+  align-items: center;
+  gap: 1.15rem;
+}
+
+@media (min-width: 768px) {
+  .kirubel-header-nav {
+    display: flex;
+  }
+}
+
+.kirubel-header-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.kirubel-header-link:hover {
+  color: #ffffff;
+}
+
+.kirubel-header-link.active {
+  color: #c9a84c;
+  font-weight: 500;
+}
+
+/* Actions right: Socials + Contact Button */
+.kirubel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.kirubel-header-socials {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+@media (min-width: 640px) {
+  .kirubel-header-socials {
+    display: flex;
+  }
+}
+
+.kirubel-header-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  color: #a1a1aa;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.2s ease;
+}
+
+.kirubel-header-icon-link:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-0.5px);
+}
+
+.kirubel-header-icon-link.htb-icon:hover {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.kirubel-header-contact-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(176, 170, 154, 0.55);
-  background: none;
+  height: 1.75rem;
+  padding: 0 0.75rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #0a0a0a;
   border: none;
+  font-family: var(--font-body, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
   cursor: pointer;
-  padding: 0.4rem 1rem;
-  position: relative;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-  border-radius: 9999px; /* ← PILL SHAPE */
+  transition: all 0.2s ease;
 }
 
-.nav-link:hover {
-  color: #f0ece2;
+.kirubel-header-contact-btn:hover {
+  background: #e4e4e7;
+  transform: translateY(-0.5px);
 }
 
-.nav-link.active {
-  color: #c9a84c;
-  background: rgba(201, 168, 76, 0.08);
-}
-
-/* Animated underline dot */
-.nav-link-dot {
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 4px;
-  background: #c9a84c;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-
-.nav-icon {
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
-  display: flex;
-  align-items: center;
-}
-.nav-link:hover .nav-icon,
-.nav-link.active .nav-icon {
-  opacity: 1;
-}
-
-/* ── Desktop social icons — pill shape ────────────────────── */
-.nav-social {
-  display: flex;
-  align-items: center;
-  gap: 0.2rem;
-  flex-shrink: 0;
-}
-
-.social-icon {
+.kirubel-mobile-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  color: rgba(176, 170, 154, 0.5);
-  text-decoration: none;
-  border: 1px solid transparent;
-  transition: all 0.25s ease;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-.social-icon:hover {
-  color: #c9a84c;
-  border-color: rgba(201, 168, 76, 0.25);
-  background: rgba(201, 168, 76, 0.05);
-}
-
-/* ── Hamburger — pill shape ────────────────────────────────── */
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  width: 38px;
-  height: 38px;
-  background: none;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: #d4d4d8;
   cursor: pointer;
-  padding: 0;
-  color: #f0ece2;
-  margin-left: auto;
-  transition: all 0.25s ease;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-.mobile-menu-btn:hover {
-  border-color: rgba(201, 168, 76, 0.35);
 }
 
-.burger-line {
-  display: block;
-  width: 16px;
-  height: 1px;
-  background: currentColor;
-  transform-origin: center;
+@media (min-width: 768px) {
+  .kirubel-mobile-btn {
+    display: none;
+  }
 }
 
-/* ── Mobile drawer — FLAT RECTANGLE (FIXED) ──────────────── */
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: min(320px, 85vw);
-  height: 100vh;
-  background: #0f0f0f;
-  border-left: 1px solid rgba(255, 255, 255, 0.07);
-  z-index: 999;
-  overflow-y: auto;
-  border-radius: 0; /* ← FLAT RECTANGLE, NO CURVES */
-}
-
-.mobile-menu-rule {
-  height: 2px;
-  background: linear-gradient(90deg, #c9a84c, rgba(201, 168, 76, 0.15));
-}
-
-.mobile-menu-content {
-  padding: 5rem 2rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  min-height: 100vh;
-}
-
-.mobile-menu-label {
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(176, 170, 154, 0.35);
-  margin-bottom: 1.2rem;
-}
-
-.mobile-nav-links {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.mobile-nav-link {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: rgba(176, 170, 154, 0.6);
-  text-decoration: none;
-  background: none;
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  padding: 0.95rem 0;
-  position: relative;
-  transition: all 0.25s ease;
-}
-.mobile-nav-link:hover {
-  color: #f0ece2;
-}
-.mobile-nav-link.active {
-  color: #c9a84c;
-}
-
-.mobile-nav-icon {
-  opacity: 0.5;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease;
-}
-.mobile-nav-link.active .mobile-nav-icon,
-.mobile-nav-link:hover .mobile-nav-icon {
-  opacity: 1;
-}
-
-/* Gold left rule on active mobile item */
-.mobile-active-rule {
+/* Mobile dropdown */
+.kirubel-mobile-menu {
   position: absolute;
-  left: -2rem;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, #c9a84c, transparent);
-}
-
-.mobile-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  margin: 1.8rem 0 1.4rem;
-}
-
-/* Mobile socials */
-.mobile-social {
-  display: flex;
-  gap: 0.6rem;
-  margin-bottom: 2rem;
-}
-.mobile-social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  color: rgba(176, 170, 154, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  text-decoration: none;
-  transition: all 0.25s ease;
-  border-radius: 9999px; /* ← Keep pill for icons only */
-}
-.mobile-social-icon:hover {
-  color: #c9a84c;
-  border-color: rgba(201, 168, 76, 0.3);
-  background: rgba(201, 168, 76, 0.05);
-}
-
-.mobile-contact {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  color: rgba(176, 170, 154, 0.3);
-}
-.mobile-contact-sep {
-  color: rgba(201, 168, 76, 0.4);
-  display: none;
-}
-
-/* ── Backdrop ──────────────────────────────────────────────── */
-.mobile-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(5, 5, 5, 0.6);
-  backdrop-filter: blur(2px);
-  z-index: 998;
-}
-
-/* ── Scroll progress bar ───────────────────────────────────── */
-.scroll-progress {
-  position: fixed;
-  top: 64px;
+  top: 3rem;
   left: 0;
   right: 0;
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.25rem;
+}
+
+.kirubel-mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.kirubel-mobile-link {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #d4d4d8;
+  padding: 0.4rem 0;
+  cursor: pointer;
+}
+
+.kirubel-mobile-link:hover {
+  color: #ffffff;
+}
+
+.kirubel-mobile-divider {
   height: 1px;
-  background: linear-gradient(90deg, #c9a84c, rgba(201, 168, 76, 0.3));
-  transform-origin: left;
-  z-index: 1001;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0.25rem 0;
 }
 
-/* ── Responsive ────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .nav-links {
-    display: none;
-  }
-  .nav-social {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-  }
-  .mobile-menu {
-    display: block;
-  }
-  .mobile-backdrop {
-    display: block;
-  }
-
-  /* Mobile Navbar: Remove pill shape — full width */
-  .navbar-scrolled {
-    height: 56px;
-    padding: 0 0.3rem;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    top: 0;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-  }
+.kirubel-mobile-socials-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-@media (max-width: 480px) {
-  .navbar-container {
-    padding: 0 1.2rem;
-  }
+.kirubel-mobile-icon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #d4d4d8;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+}
+
+.kirubel-mobile-icon-pill:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.kirubel-mobile-ext-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: #a1a1aa;
+  text-decoration: none;
+  padding: 0.3rem 0;
+}
+
+.kirubel-mobile-ext-link:hover {
+  color: #fafafa;
 }

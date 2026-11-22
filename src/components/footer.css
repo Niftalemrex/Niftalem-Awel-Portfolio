@@ -1,424 +1,153 @@
 /* ============================================================
-   FOOTER — Dark Editorial Luxury + Pill Shape
+   FOOTER — Kirubel Kibru Reference Design
+   mt-20, border-t, bg-[#0a0a0a], max-w-3xl, clean typography
+   Socials: GitHub, HTB, LinkedIn, Telegram, Security Hub, Certs
    ============================================================ */
 
-/* ── Shell ─────────────────────────────────────────────────── */
-.footer {
-  position: relative;
+.kirubel-footer {
+  margin-top: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   background: #0a0a0a;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
-  overflow: hidden;
+  color: #c8c8c8;
 }
 
-/* ── Container ─────────────────────────────────────────────── */
-.footer-container {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1200px;
+.kirubel-footer-inner {
+  max-width: 52rem;
   margin: 0 auto;
-  padding: 4rem 2rem 2rem;
-}
-
-/* ── Main Content Grid ─────────────────────────────────────── */
-.footer-content {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr 1.6fr;
-  gap: 3rem;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* ── Brand ─────────────────────────────────────────────────── */
-.footer-brand {
+  padding: 2.5rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.footer-logo {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  font-style: italic;
-  color: #c9a84c;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+@media (min-width: 640px) {
+  .kirubel-footer-inner {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
 }
 
-.footer-logo-dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  background: #c9a84c;
-  flex-shrink: 0;
-  opacity: 0.7;
-  border-radius: 50%; /* ← CIRCLE */
-}
-
-.footer-tagline {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 300;
-  line-height: 1.7;
-  color: rgba(176, 170, 154, 0.5);
-  margin: 0;
-  max-width: 28ch;
-}
-
-/* ── Contact Info ──────────────────────────────────────────── */
-.footer-contact {
+.kirubel-footer-left {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  margin-top: 0.5rem;
-}
-
-.footer-contact-item {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  color: rgba(176, 170, 154, 0.45);
-  transition: all 0.25s ease;
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-
-.footer-contact-item svg {
-  color: rgba(201, 168, 76, 0.5);
-  flex-shrink: 0;
-}
-
-.footer-contact-item:hover {
-  color: rgba(176, 170, 154, 0.8);
-  background: rgba(201, 168, 76, 0.04);
-}
-
-/* ── Quick Links ───────────────────────────────────────────── */
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.footer-links h4 {
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(176, 170, 154, 0.35);
-  margin: 0 0 1.2rem 0;
-  font-weight: 400;
-}
-
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.footer-links ul li a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 300;
-  color: rgba(176, 170, 154, 0.55);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 0.7rem 0;
-  width: 100%;
-  transition: all 0.25s ease;
-  position: relative;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-
-.footer-links ul li a::before {
-  content: '';
-  display: inline-block;
-  width: 12px;
-  height: 1px;
-  background: rgba(201, 168, 76, 0.5);
-  flex-shrink: 0;
-  transition: width 0.25s ease, background 0.25s ease;
-}
-
-.footer-links ul li a:hover {
-  color: #f0ece2;
-  padding-left: 0.25rem;
-  background: rgba(201, 168, 76, 0.03);
-}
-
-.footer-links ul li a:hover::before {
-  width: 18px;
-  background: #c9a84c;
-}
-
-/* ── Social & CTA ──────────────────────────────────────────── */
-.footer-social {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.footer-social h4 {
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(176, 170, 154, 0.35);
-  margin: 0 0 1.2rem 0;
-  font-weight: 400;
-}
-
-.footer-social-icons {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-bottom: 1.8rem;
-}
-
-.footer-social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  color: rgba(176, 170, 154, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  text-decoration: none;
-  transition: all 0.25s ease;
-  position: relative;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-
-.footer-social-icon:hover {
-  color: #c9a84c;
-  border-color: rgba(201, 168, 76, 0.3);
-  background: rgba(201, 168, 76, 0.05);
-}
-
-/* ── Let's Talk CTA ────────────────────────────────────────── */
-.footer-lets-talk {
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: rgba(201, 168, 76, 0.02);
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px; /* ← RECTANGLE WITH CURVE */
-}
-
-/* Gold accent line top */
-.footer-lets-talk::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, #c9a84c, rgba(201, 168, 76, 0.1));
-}
-
-.lets-talk-content {
-  display: flex;
-  align-items: flex-start;
   gap: 0.75rem;
 }
 
-.lets-talk-icon {
-  color: rgba(201, 168, 76, 0.6);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.lets-talk-text h5 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1rem;
-  font-weight: 400;
-  font-style: italic;
-  color: #f0ece2;
-  margin: 0 0 0.25rem 0;
-  letter-spacing: -0.01em;
-}
-
-.lets-talk-text p {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 300;
-  color: rgba(176, 170, 154, 0.45);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.lets-talk-buttons {
+.kirubel-footer-brand-row {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
-}
-
-.lets-talk-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 0.55rem 0.9rem;
-  border: 1px solid transparent;
-  transition: all 0.25s ease;
-  cursor: pointer;
-  border-radius: 9999px; /* ← PILL SHAPE */
-}
-
-.lets-talk-btn.primary {
-  color: #0a0a0a;
-  background: #c9a84c;
-  border-color: #c9a84c;
-}
-
-.lets-talk-btn.primary:hover {
-  background: #d4b86a;
-  border-color: #d4b86a;
-}
-
-.lets-talk-btn.secondary {
-  color: rgba(176, 170, 154, 0.65);
-  background: transparent;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.lets-talk-btn.secondary:hover {
-  color: #c9a84c;
-  border-color: rgba(201, 168, 76, 0.35);
-  background: rgba(201, 168, 76, 0.05);
-}
-
-/* ── Bottom Bar ────────────────────────────────────────────── */
-.footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 1.8rem;
-  gap: 1rem;
-}
-
-.footer-copyright {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+  font-size: 0.875rem;
   flex-wrap: wrap;
 }
 
-.footer-copyright p {
-  font-family: 'DM Mono', 'Fira Code', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  color: rgba(176, 170, 154, 0.3);
+.kirubel-footer-brand-name {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.kirubel-footer-dash {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.kirubel-footer-role {
+  color: #a1a1aa;
+  font-size: 0.8125rem;
+}
+
+.kirubel-footer-socials-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.kirubel-footer-icon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: #a1a1aa;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.kirubel-footer-icon-pill:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-0.5px);
+}
+
+.kirubel-footer-icon-pill.htb-pill:hover {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.kirubel-footer-icon-pill.report-pill {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.kirubel-footer-icon-pill.report-pill:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.kirubel-footer-icon-pill.cert-pill {
+  color: #c9a84c;
+  border-color: rgba(201, 168, 76, 0.25);
+}
+
+.kirubel-footer-icon-pill.cert-pill:hover {
+  border-color: rgba(201, 168, 76, 0.5);
+  background: rgba(201, 168, 76, 0.08);
+}
+
+.kirubel-footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 0.8125rem;
+  color: #71717a;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .kirubel-footer-right {
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+.kirubel-footer-made {
+  color: #a1a1aa;
   margin: 0;
 }
 
-.footer-made-with {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
+.kirubel-footer-copy {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
 }
 
-.footer-heart {
-  color: rgba(201, 168, 76, 0.6);
-  display: inline-block;
-}
-
-/* ── Back to Top ───────────────────────────────────────────── */
-.footer-back-to-top {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  color: rgba(176, 170, 154, 0.4);
+.kirubel-footer-top-btn {
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
+  padding: 0;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: #71717a;
   cursor: pointer;
-  flex-shrink: 0;
-  transition: all 0.25s ease;
-  border-radius: 9999px; /* ← PILL SHAPE */
+  transition: color 0.2s ease;
 }
 
-.footer-back-to-top:hover {
-  color: #c9a84c;
-  border-color: rgba(201, 168, 76, 0.3);
-  background: rgba(201, 168, 76, 0.05);
-}
-
-/* ── Background ────────────────────────────────────────────── */
-.footer-background {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.footer-gradient {
-  position: absolute;
-  bottom: 0;
-  left: -10%;
-  width: 50%;
-  height: 60%;
-  background: radial-gradient(ellipse at bottom left, rgba(201, 168, 76, 0.04) 0%, transparent 70%);
-}
-
-/* ── Responsive ────────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-  }
-
-  .footer-brand {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 600px) {
-  .footer-container {
-    padding: 3rem 1.2rem 1.5rem;
-  }
-
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .footer-brand {
-    grid-column: auto;
-  }
-
-  .footer-copyright {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  .lets-talk-buttons {
-    flex-direction: column;
-  }
-
-  .lets-talk-btn {
-    justify-content: center;
-  }
+.kirubel-footer-top-btn:hover {
+  color: #ffffff;
 }
