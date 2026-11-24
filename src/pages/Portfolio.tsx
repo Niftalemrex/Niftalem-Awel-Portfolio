@@ -36,6 +36,19 @@ import warrenLogo from "../assets/Warren.png";
 import insaLogo from "../assets/insa.jpg";
 import phoenixLogo from "../assets/phoenixopia.png";
 import pedsLogo from "../assets/peds.png";
+import aauCert from "../assets/cert logo/aau.png";
+import alxCert from "../assets/cert logo/alx.png";
+import bbcCert from "../assets/cert logo/bbc.png";
+import cbeCert from "../assets/cert logo/cbe.png";
+import dundancoreCert from "../assets/cert logo/dundancore.png";
+import ediCert from "../assets/cert logo/edi.png";
+import mceCert from "../assets/cert logo/mce.png";
+import miteCert from "../assets/cert logo/mite.png";
+import mlsCert from "../assets/cert logo/mls.png";
+import securelabCert from "../assets/cert logo/securelab.png";
+import uCert from "../assets/cert logo/u.png";
+import worldBankCert from "../assets/cert logo/world bank.png";
+import yekoloCert from "../assets/cert logo/yekolo temari.png";
 import cvPDF from "../File/Niftalem Awel Resume.pdf";
 import ProjectCarousel from "./ProjectCarousel";
 import type { CarouselProject } from './ProjectCard';
@@ -236,6 +249,27 @@ const education = [
     description: "Strong foundation in Computer Science with focus on software engineering, algorithms, and data structures.",
     icon: <GraduationCap size={20} />
   }
+];
+
+/* ── Certificate Logos (Vertical Scrolling Tracks) ────────── */
+const certLogosCol1 = [
+  { name: "Addis Ababa University", src: aauCert },
+  { name: "ALX Africa", src: alxCert },
+  { name: "BBC", src: bbcCert },
+  { name: "Commercial Bank of Ethiopia", src: cbeCert },
+  { name: "DundanCore", src: dundancoreCert },
+  { name: "EDI", src: ediCert },
+  { name: "MCE", src: mceCert },
+];
+
+const certLogosCol2 = [
+  { name: "MITE", src: miteCert },
+  { name: "MLS", src: mlsCert },
+  { name: "SecureLab", src: securelabCert },
+  { name: "Udacity", src: uCert },
+  { name: "World Bank", src: worldBankCert },
+  { name: "Yekolo Temari", src: yekoloCert },
+  { name: "AAU Cyber Security", src: aauCert },
 ];
 
 const carouselProjects: CarouselProject[] = [
@@ -944,49 +978,47 @@ export default function Portfolio() {
           </motion.div>
 
           <div className="timeline snake-timeline">
-            {/* Unique Snake / Serpentine Curved Timeline SVG Connector with Golden Glow Light */}
-            <svg
-              className="snake-timeline-svg"
-              viewBox="0 0 54 850"
-              fill="none"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="snakeGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#c9a84c" stopOpacity="0.85" />
-                  <stop offset="50%" stopColor="#8a6d2f" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#c9a84c" stopOpacity="0.25" />
-                </linearGradient>
-                <filter id="glowLight" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <path
-                d="M 23 20 C 46 110, 0 200, 23 290 C 46 380, 0 470, 23 560 C 46 650, 0 740, 23 830"
-                stroke="#c9a84c"
-                strokeWidth="4"
-                strokeOpacity="0.2"
-                filter="url(#glowLight)"
-              />
-              <path
-                d="M 23 20 C 46 110, 0 200, 23 290 C 46 380, 0 470, 23 560 C 46 650, 0 740, 23 830"
-                stroke="url(#snakeGrad)"
-                strokeWidth="2"
-                strokeDasharray="6 4"
-              />
-              <circle cx="23" cy="23" r="5" fill="#c9a84c" filter="url(#glowLight)" />
-              <circle cx="23" cy="290" r="5" fill="#c9a84c" filter="url(#glowLight)" />
-              <circle cx="23" cy="560" r="5" fill="#c9a84c" filter="url(#glowLight)" />
-            </svg>
-
             {projects.map((proj, i) => (
               <motion.div key={i} className="timeline-item" variants={fadeInUp}>
-                <div className="timeline-icon">{proj.icon}</div>
+                <div className="timeline-node-col">
+                  <div className="timeline-icon">{proj.icon}</div>
+
+                  {i < projects.length - 1 && (
+                    <div className="timeline-curve-connector" aria-hidden="true">
+                      <svg
+                        className="timeline-curve-svg"
+                        viewBox="0 0 44 100"
+                        preserveAspectRatio="none"
+                      >
+                        <defs>
+                          <linearGradient id={`curveGrad-${i}`} x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.2" />
+                            <stop offset="50%" stopColor="#ffffff" stopOpacity="0.85" />
+                            <stop offset="100%" stopColor="#ffffff" stopOpacity="0.2" />
+                          </linearGradient>
+                        </defs>
+
+                        {/* Subtle Background Guide Curve */}
+                        <path
+                          d="M 22 0 C 22 18, 38 32, 22 50 C 6 68, 22 82, 22 100"
+                          stroke="rgba(255, 255, 255, 0.08)"
+                          strokeWidth="2"
+                          fill="none"
+                        />
+
+                        {/* Primary Elegant Animated S-Curve (White) */}
+                        <path
+                          d="M 22 0 C 22 18, 38 32, 22 50 C 6 68, 22 82, 22 100"
+                          stroke={`url(#curveGrad-${i})`}
+                          strokeWidth="1.5"
+                          strokeDasharray="4 3"
+                          fill="none"
+                          className="timeline-curve-flow"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </div>
 
                 <div className="timeline-content">
                   <div className="timeline-header">
@@ -1089,37 +1121,63 @@ export default function Portfolio() {
             <div className="section-divider" />
           </motion.div>
 
-          {/* Kirubel-Style Certificates Hub Showcase Card with White Border */}
+          {/* Kirubel-Style Certificates Hub Showcase Card with Vertical Scrolling Logos */}
           <motion.div variants={fadeInUp} className="kirubel-certs-card">
-            <div className="kirubel-certs-header">
-              <div className="kirubel-certs-icon-wrap">
-                <Award size={26} />
-              </div>
-              <div className="kirubel-certs-meta">
-                <span className="kirubel-certs-badge">
-                  <span className="kirubel-certs-dot" /> Verified Credentials Platform
-                </span>
-                <h3 className="kirubel-certs-title">Official Certificates &amp; Accreditations</h3>
-              </div>
-            </div>
+            <div className="kirubel-certs-card-inner">
+              <div className="kirubel-certs-info-side">
+                <div className="kirubel-certs-header">
+                  <div className="kirubel-certs-icon-wrap">
+                    <Award size={26} />
+                  </div>
+                  <div className="kirubel-certs-meta">
+                    <span className="kirubel-certs-badge">
+                      <span className="kirubel-certs-dot" /> Verified Credentials Platform
+                    </span>
+                    <h3 className="kirubel-certs-title">Official Certificates &amp; Accreditations</h3>
+                  </div>
+                </div>
 
-            <p className="kirubel-certs-desc">
-              All official academic degrees, Nanodegrees (Udacity Artificial Intelligence, Programming &amp; Android), ALX Africa accreditations, and systems security credentials are systematically organized and verifiable on my live platform.
-            </p>
+                <p className="kirubel-certs-desc">
+                  All official academic degrees, Nanodegrees (Udacity Artificial Intelligence, Programming &amp; Android), ALX Africa accreditations, and systems security credentials are systematically organized and verifiable on my live platform.
+                </p>
 
-            <div className="kirubel-certs-footer">
-              <motion.a
-                href="https://niftalem-certificates.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="kirubel-certs-btn"
-                whileTap={{ scale: 0.97 }}
-              >
-                <Award size={15} />
-                <span>Explore Live Platform</span>
-                <ArrowUpRight size={15} />
-              </motion.a>
-              <span className="kirubel-certs-url">niftalem-certificates.vercel.app</span>
+                <div className="kirubel-certs-footer">
+                  <motion.a
+                    href="https://niftalem-certificates.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="kirubel-certs-btn"
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <Award size={15} />
+                    <span>Explore Live Platform</span>
+                    <ArrowUpRight size={15} />
+                  </motion.a>
+                  <span className="kirubel-certs-url">niftalem-certificates.vercel.app</span>
+                </div>
+              </div>
+
+              {/* Vertical Animated Certificate Logos Showcase */}
+              <div className="kirubel-certs-showcase-side" aria-label="Certificate accreditation logos">
+                <div className="kirubel-certs-track-col">
+                  <div className="kirubel-certs-v-track track-up">
+                    {[...certLogosCol1, ...certLogosCol1].map((logo, idx) => (
+                      <div key={`col1-${idx}`} className="kirubel-cert-badge-box" title={logo.name}>
+                        <img src={logo.src} alt={logo.name} className="kirubel-cert-badge-img" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="kirubel-certs-track-col">
+                  <div className="kirubel-certs-v-track track-down">
+                    {[...certLogosCol2, ...certLogosCol2].map((logo, idx) => (
+                      <div key={`col2-${idx}`} className="kirubel-cert-badge-box" title={logo.name}>
+                        <img src={logo.src} alt={logo.name} className="kirubel-cert-badge-img" loading="lazy" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.div>
         </motion.div>

@@ -1162,54 +1162,92 @@
       background: rgba(201, 168, 76, 0.08);
     }
 
-   /* ── PROJECTS (Formerly Experience: XDose, NiCol, WEMS) ────── */
+   /* ── PROJECTS (Serpentine / Snake Curved Light Connector) ── */
    .portfolio-projects { padding: 7rem 2rem; background: var(--ink); position: relative; }
    .portfolio-projects::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim), transparent); }
    .projects-container { max-width: 900px; margin: 0 auto; }
    
-    /* Serpentine / Snake Timeline Style */
-    .snake-timeline {
-      position: relative;
-    }
-    .snake-timeline::before {
-      display: none !important;
-    }
-    .snake-timeline-svg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 46px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
+   .snake-timeline {
+     position: relative;
+   }
+   .snake-timeline::before {
+     display: none !important;
+   }
 
-.timeline { position: relative; }
-   .timeline::before { content: ''; position: absolute; left: 23px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--gold), transparent); }
-   .timeline-item { display: flex; gap: 2.5rem; margin-bottom: 3.5rem; position: relative; }
+   .timeline-item {
+     display: flex;
+     gap: 2.5rem;
+     margin-bottom: 3.5rem;
+     position: relative;
+     align-items: flex-start;
+   }
    .timeline-item:last-child { margin-bottom: 0; }
+
+   .timeline-node-col {
+     position: relative;
+     width: 44px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     flex-shrink: 0;
+   }
+
    .timeline-icon {
-      width: 46px;
-      height: 46px;
-      background: var(--surface-2);
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #c9a84c;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      transition: all 0.3s ease;
-      border-radius: 12px;
-    }
+     width: 44px;
+     height: 44px;
+     border-radius: 50%;
+     background: #121212;
+     border: 1px solid rgba(255, 255, 255, 0.12);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #ffffff;
+     position: relative;
+     z-index: 2;
+     transition: all 0.25s ease;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+   }
+
    .timeline-item:hover .timeline-icon {
-      border-color: #c9a84c;
-      background: rgba(201, 168, 76, 0.14);
-      color: #deb859;
-      box-shadow: 0 0 14px rgba(201, 168, 76, 0.25);
-    }
+     border-color: rgba(255, 255, 255, 0.4);
+     color: #ffffff;
+     background: #181818;
+     box-shadow: 0 0 16px rgba(255, 255, 255, 0.15);
+     transform: scale(1.04);
+   }
+
+   .timeline-curve-connector {
+     position: absolute;
+     top: 44px;
+     bottom: -3.5rem;
+     width: 44px;
+     left: 0;
+     pointer-events: none;
+     z-index: 1;
+   }
+
+   .timeline-curve-svg {
+     width: 100%;
+     height: 100%;
+     display: block;
+     overflow: visible;
+   }
+
+   .timeline-curve-flow {
+     animation: curveFlow 6s linear infinite;
+     transition: stroke 0.3s ease, filter 0.3s ease;
+   }
+
+   .timeline-item:hover .timeline-curve-flow {
+     stroke: #ffffff;
+     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6));
+   }
+
+   @keyframes curveFlow {
+     from { stroke-dashoffset: 28; }
+     to { stroke-dashoffset: 0; }
+   }
+
    .timeline-content { flex: 1; background: var(--ink-soft); border: 1px solid var(--border); padding: 2rem; position: relative; transition: border-color 0.3s ease; border-radius: 16px; }
    .timeline-content::before {
       content: '';
@@ -1228,21 +1266,22 @@
     }
    .timeline-item:hover .timeline-content { border-color: var(--border-mid); }
    .timeline-item:hover .timeline-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1.5px;
-      background: linear-gradient(90deg, #c9a84c, #8a6d2f, transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s var(--ease-out-expo);
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      display: block !important;
-    }
-   .timeline-content::after { content: ''; position: absolute; left: -8px; top: 18px; width: 8px; height: 1px; background: var(--border-mid); }
+      transform: scaleX(1);
+   }
+   .timeline-content::after {
+     content: '';
+     position: absolute;
+     left: -18px;
+     top: 25px;
+     width: 18px;
+     height: 1px;
+     background: linear-gradient(90deg, rgba(255, 255, 255, 0.25), var(--border-mid));
+     transition: background 0.3s ease;
+   }
+   .timeline-item:hover .timeline-content::after {
+     background: linear-gradient(90deg, #ffffff, rgba(255, 255, 255, 0.2));
+     box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+   }
    .timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.4rem; flex-wrap: wrap; }
    .timeline-content h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ivory); }
    .timeline-period {
@@ -1351,9 +1390,6 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 1rem;
       padding: 2.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
       transition: all 0.25s var(--ease-out-expo);
       position: relative;
@@ -1361,11 +1397,113 @@
     }
 
    .kirubel-certs-card:hover {
-      border-color: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.22);
       background: #141414;
       transform: translateY(-2px);
       box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
     }
+
+   .kirubel-certs-card-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      align-items: center;
+   }
+
+   .kirubel-certs-info-side {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-width: 0;
+   }
+
+   .kirubel-certs-showcase-side {
+      display: flex;
+      gap: 0.85rem;
+      height: 230px;
+      overflow: hidden;
+      position: relative;
+      mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+      padding: 4px 0;
+      user-select: none;
+   }
+
+   .kirubel-certs-track-col {
+      width: 62px;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+   }
+
+   .kirubel-certs-v-track {
+      display: flex;
+      flex-direction: column;
+      will-change: transform;
+   }
+
+   .kirubel-certs-v-track.track-up {
+      animation: certScrollUp 22s linear infinite;
+   }
+
+   .kirubel-certs-v-track.track-down {
+      animation: certScrollDown 22s linear infinite;
+   }
+
+   .kirubel-certs-showcase-side:hover .kirubel-certs-v-track {
+      animation-play-state: paused;
+   }
+
+   @keyframes certScrollUp {
+      0% {
+         transform: translateY(0);
+      }
+      100% {
+         transform: translateY(-50%);
+      }
+   }
+
+   @keyframes certScrollDown {
+      0% {
+         transform: translateY(-50%);
+      }
+      100% {
+         transform: translateY(0);
+      }
+   }
+
+   .kirubel-cert-badge-box {
+      width: 62px;
+      height: 62px;
+      margin-bottom: 0.75rem;
+      background: #171717;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+   }
+
+   .kirubel-cert-badge-box:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: #202020;
+      transform: scale(1.05);
+   }
+
+   .kirubel-cert-badge-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+   }
 
    .kirubel-certs-header {
      display: flex;
@@ -1891,21 +2029,13 @@
      .hero-contact { gap: 0.4rem 0.8rem; font-size: 0.62rem; }
      .timeline::before { display: none; }
      .timeline-item { flex-direction: column; gap: 1rem; }
-     .timeline-icon {
-      width: 46px;
-      height: 46px;
-      background: var(--surface-2);
-      border: 1px solid rgba(201, 168, 76, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #c9a84c;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      transition: all 0.3s ease;
-      border-radius: 12px;
-    }
+     .timeline-node-col {
+       width: auto;
+       flex-direction: row;
+       align-items: center;
+       gap: 0.75rem;
+     }
+     .timeline-curve-connector { display: none; }
      .timeline-content::after { display: none; }
      .skills-grid { grid-template-columns: 1fr; gap: 1.5px; }
      .certifications-grid { grid-template-columns: 1fr 1fr; }
@@ -2046,6 +2176,14 @@
       display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono);
       font-size: 0.7rem; color: #ffffff; padding: 0.2rem 0.8rem;
       border-right: 1px solid var(--border);
+    }
+     .kirubel-certs-card-inner {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+     .kirubel-certs-showcase-side {
+      height: 160px;
+      justify-content: center;
     }
    }
     .kirubel-certs-dot {
